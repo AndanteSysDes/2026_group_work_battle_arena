@@ -11,9 +11,16 @@ public class Player {
 
    private String name;
     private Fighter fighter;
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
+
     public Player(){
         this.name = "Maahi";
+        this.scanner= new Scanner(System.in);
+    }
+
+    public Player(Scanner scanner){
+//        this.name = "Maahi";
+        this.scanner= scanner;
     }
 
     public String getName() {
@@ -42,8 +49,11 @@ public class Player {
             if(input.isEmpty()){
                 System.out.println("Input can not be empty.");
             }
-            chooseFighter();
+//            chooseFighter();
+            setName(input);
+            return;
         }
+
 
     }
 

@@ -17,9 +17,9 @@ class PlayerTest {
 
     @Test
     void inputNameShouldStoreName(){
-        //Player player = new Player(new Scanner("Maahi"));
+        Player player = new Player(new Scanner("Maahi"));
          player.inputName();
-         assertEquals("",player.getName());
+         assertEquals("Maahi", player.getName());
     }
 
     @Test
@@ -33,6 +33,10 @@ class PlayerTest {
     @Test
     void inputCommand() {
     }
+
+
+    // Scanner mock
+
 
 
 }
