@@ -15,21 +15,22 @@ public class Ranger extends Fighter{
 
     @Override
     public int attack(){
-        // skriv någonting
         Random random = new Random();
-        int attackPoint = random.nextInt(7,17);
+        int attackPoint = random.nextInt(7,18);
         return attackPoint;
 
     }
+
     @Override
     public void takeDamage(int damage){
-        // skriv någonting
         this.currentHp =Math.max(0, this.currentHp- damage);
     }
+
     @Override
     public int useAbility(){
-        // skriv någonting
         Random random = new Random();
-        return random.nextInt(12,20);
+        hasSpecialAbilityUsed = true;
+        return random.nextInt(12,21);
+
     }
 }

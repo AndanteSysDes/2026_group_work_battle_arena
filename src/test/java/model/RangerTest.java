@@ -59,11 +59,6 @@ public class RangerTest {
         assertEquals(0, ranger.getCurrentHp());
     }
 
-  /*  @Test
-    void rangerShouldNotHaveDamageReduction(){
-        ranger.takeDamage(20);
-        assertEquals(85, ranger.getCurrentHp());
-    }*/
 
     // specialAbility
 
@@ -90,6 +85,24 @@ public class RangerTest {
         assertEquals(105, ranger.getCurrentHp());
     }
 
+    @Test
+    void hasSpecialAbilityUsedShouldReturnTrueAfterUsingSpecialAbility(){
+        assertFalse(ranger.hasSpecialAbilityUsed);
+        ranger.useAbility();
+        assertTrue(ranger.hasSpecialAbilityUsed);
+    }
+
+    @Test
+    void isAliveShouldReturnTrueIfCurrentHPIsGreaterThan0(){
+        ranger.setCurrentHp(200);
+        assertTrue(ranger.isAlive());
+    }
+
+    @Test
+    void isAliveShouldReturnFalseIfCurrentHPIs0(){
+        ranger.setCurrentHp(0);
+        assertFalse(ranger.isAlive());
+    }
 
 
 }
