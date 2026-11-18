@@ -43,24 +43,36 @@ public class Player {
 
         String input;
 
-        do {
+        while (true) {
             System.out.println("Ange ditt namn: ");
+
+            if(!scanner.hasNextLine()) {
+                // User inputs EOF. We will think about it later...
+                System.out.println("Inmatningen avslutades.");
+                return;
+            }
+
             input = scanner.nextLine().trim();
             if (input.isEmpty()) {
                 System.out.println("Namnet får inte vara tomt.");
+                continue;
             }
-        } while (input.isEmpty());
-        setName(input);
+            setName(input);
+            break;
+
+        }
 
     }
 
     public void chooseFighter() {
         String errorMessage = "Ogiltigt val, ange mellan 1 och 3.";
         boolean isInvalidValue = false;
+
         while (fighter == null) {
             if (isInvalidValue) {
                 System.out.println(errorMessage);
             }
+            isInvalidValue = false;
 
             System.out.println(" Karaktär finns:");
             System.out.println("1. Warrior har specialförmåga-> 120 HP, Defend");
@@ -68,15 +80,17 @@ public class Player {
             System.out.println("3. Ranger har specialförmåga -> 105 HP, Precise Shot");
             System.out.println("Välj ditt karaktär: ");
 
-
-            String input = scanner.nextLine();
-            if (input == null) {
-                System.out.println(errorMessage);
-                continue;
+            if(!scanner.hasNextLine()) {
+                // User inputs EOF. We will think about it later...
+                System.out.println("Inmatningen avslutades.");
+                return;
             }
 
-            input = input.trim();
-            isInvalidValue = false;
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                isInvalidValue = true;
+                continue;
+            }
 
             switch (input) {
                 case "1" -> fighter = new Warrior();
@@ -87,13 +101,15 @@ public class Player {
                     isInvalidValue = true;
                 }
             }
+
         }
     }
 
     public int inputCommand() {
 
-        String MessageForNullValue = "Du måste skriva en siffra.";
+        String MessageForNullValue = "Inmatningen avslutades.";
         String MessageForInvalidValue = "Du måste skriva en siffra.";
+        String MessageForError = "Ett problem uppstod. Försök igen.";
         String input;
 
         while (true) {
@@ -103,20 +119,20 @@ public class Player {
             System.out.println("2. Specialförmåga");
             System.out.println(" Skriv ditt kommando : ");
 
-            input = scanner.nextLine();
-            if (input == null) {
+            if(!scanner.hasNextLine()) {
+                // User inputs EOF. We will think about it later...
                 System.out.println(MessageForNullValue);
-                continue;
+                return -1;
             }
 
-            input = input.trim();
+            input = scanner.nextLine().trim();
             if (input.equals("1") || input.equals("2")) {
 
                 try {
                     int selectValue = Integer.parseInt(input);
                     return selectValue;
                 } catch (NumberFormatException e) {
-                    System.out.println("Du måste skriva en siffra.");
+                    System.out.println(MessageForError);
                     continue;
                 }
             }
