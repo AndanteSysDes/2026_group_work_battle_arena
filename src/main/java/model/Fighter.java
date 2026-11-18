@@ -1,16 +1,27 @@
 package model;
 
+import java.util.Random;
+
 public abstract class Fighter implements SpecialAbility{
 
     protected String name;
-    protected int currentHp;
     protected int maxHp;
+    protected int currentHp;
     protected ActionType normalAbility;
     protected ActionType specialAbility;
     protected boolean hasSpecialAbilityUsed;
+    protected Random random;
+    protected int minAttackPoint;
+    protected int maxAttackPoint;
 
     public Fighter(){
         this.normalAbility =ActionType.ATTACK;
+        this.random = new Random();
+    }
+
+    public Fighter(Random random){
+        this.normalAbility =ActionType.ATTACK;
+        this.random = random;
     }
 
     public String getName() {
@@ -61,8 +72,15 @@ public abstract class Fighter implements SpecialAbility{
         this.hasSpecialAbilityUsed = hasSpecialAbilityUsed;
     }
 
-    public abstract int attack();
-    public abstract void takeDamage( int damage );
+    public int attack(){
+        int attackPoint = random.nextInt(minAttackPoint, maxAttackPoint+1);
+        return attackPoint;
+    };
+
+    public void takeDamage( int damage ){
+        this.currentHp =Math.max(0, this.currentHp- damage);
+    };
+
     public boolean isAlive(){
         return 0 < currentHp;
     };
