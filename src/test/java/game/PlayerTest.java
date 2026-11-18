@@ -80,12 +80,12 @@ class PlayerTest {
     }
 
 
-   /* @Test
+   @Test
     void chooseFighterShouldChooseInvalidInput(){
         player = new Player(new Scanner("9\n1\n"));
         player.chooseFighter();
         assertEquals(Warrior.class, player.getFighter().getClass());
-    }*/
+    }
 
     @Test
     void ChooseFighterShouldChooseBeNull(){
@@ -109,12 +109,6 @@ class PlayerTest {
         player = new Player(new Scanner("2\n"));
         assertEquals(2, player.inputCommand());
     }
-
-  /*  @Test
-    void inputCommandShouldEnterInvalidCommand(){
-        player = new Player(new Scanner("\n3\n"));
-        assertEquals(2, player.inputCommand());
-    }*/
 
     @Test
     void inputCommandShouldReturCollectValue(){

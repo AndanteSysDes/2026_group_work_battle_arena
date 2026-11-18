@@ -9,18 +9,17 @@ import java.util.Scanner;
 
 public class Player {
 
-   private String name;
+    private String name;
     private Fighter fighter;
     Scanner scanner;
 
-    public Player(){
+    public Player() {
         this.name = "";
-        this.scanner= new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
-    public Player(Scanner scanner){
-//        this.name = "Maahi";
-        this.scanner= scanner;
+    public Player(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     public String getName() {
@@ -40,28 +39,28 @@ public class Player {
     }
 
 
-    public void inputName(){
-        //Scanner scanner = new Scanner(System.in);
+    public void inputName() {
 
-        String input ;
-       // while(true){
+        String input;
+
         do {
             System.out.println("Ange ditt namn: ");
             input = scanner.nextLine().trim();
             if (input.isEmpty()) {
                 System.out.println("Namnet får inte vara tomt.");
             }
-        }while (input.isEmpty());
-            setName(input);
-           // return;
-        //}
-
+        } while (input.isEmpty());
+        setName(input);
 
     }
 
-    public void chooseFighter(){
-        while (fighter == null)
-        {
+    public void chooseFighter() {
+        String errorMessage = "Ogiltigt val, ange mellan 1 och 3.";
+        boolean isInvalidValue = false;
+        while (fighter == null) {
+            if (isInvalidValue) {
+                System.out.println(errorMessage);
+            }
 
             System.out.println(" Karaktär finns:");
             System.out.println("1. Warrior har specialförmåga-> 120 HP, Defend");
@@ -69,41 +68,62 @@ public class Player {
             System.out.println("3. Ranger har specialförmåga -> 105 HP, Precise Shot");
             System.out.println("Välj ditt karaktär: ");
 
-            String input = scanner.nextLine().trim();
+
+            String input = scanner.nextLine();
+            if (input == null) {
+                System.out.println(errorMessage);
+                continue;
+            }
+
+            input = input.trim();
+            isInvalidValue = false;
 
             switch (input) {
                 case "1" -> fighter = new Warrior();
-                // break;
                 case "2" -> fighter = new Mage();
-                // break;
                 case "3" -> fighter = new Ranger();
-                //break;
-                default -> throw new IllegalStateException(
-                        "Ogiltigt val, ange mellan 1 och 3." + input);
+                default -> {
+                    fighter = null;
+                    isInvalidValue = true;
+                }
             }
         }
     }
-    public int inputCommand(){
 
-        //int selectValue;
-        while(true) {
+    public int inputCommand() {
+
+        String MessageForNullValue = "Du måste skriva en siffra.";
+        String MessageForInvalidValue = "Du måste skriva en siffra.";
+        String input;
+
+        while (true) {
 
             System.out.println("Välj handling : ");
             System.out.println("1. Vanlig attack");
             System.out.println("2. Specialförmåga");
             System.out.println(" Skriv ditt kommando : ");
-            String input = scanner.nextLine().trim();
-            try {
-                int selectValue = Integer.parseInt(input);
-                if (selectValue == 1 || selectValue == 2) {
-                    return selectValue;
-                }
-                System.out.println("Skriv 1 eller 2.");
-            } catch (NumberFormatException e) {
-                System.out.println("Du måste skriva en siffra.");
+
+            input = scanner.nextLine();
+            if (input == null) {
+                System.out.println(MessageForNullValue);
+                continue;
             }
+
+            input = input.trim();
+            if (input.equals("1") || input.equals("2")) {
+
+                try {
+                    int selectValue = Integer.parseInt(input);
+                    return selectValue;
+                } catch (NumberFormatException e) {
+                    System.out.println("Du måste skriva en siffra.");
+                    continue;
+                }
+            }
+            System.out.println(MessageForInvalidValue);
+
         }
-
     }
-
 }
+
+
