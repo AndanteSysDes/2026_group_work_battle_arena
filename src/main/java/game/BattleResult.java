@@ -2,34 +2,34 @@ package game;
 
 public class BattleResult {
 
-    private String UserName;
-    private String UserCharacter;
-    private String ComputerCharacter;
-    private String Winner;
+    private String userName;
+    private String userCharacter;
+    private String computerCharacter;
+    private String winner;
     private int totalRounds;
 
     public BattleResult(String userName, String userCharacter, String computerCharacter, String winner, int totalRounds) {
-        UserName = userName;
-        UserCharacter = userCharacter;
-        ComputerCharacter = computerCharacter;
-        Winner = winner;
+        userName = userName;
+        userCharacter = userCharacter;
+        computerCharacter = computerCharacter;
+        this.winner = winner;
         this.totalRounds = totalRounds;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public String getUserCharacter() {
-        return UserCharacter;
+        return userCharacter;
     }
 
     public String getComputerCharacter() {
-        return ComputerCharacter;
+        return computerCharacter;
     }
 
     public String getWinner() {
-        return Winner;
+        return winner;
     }
 
     public int getTotalRounds() {
