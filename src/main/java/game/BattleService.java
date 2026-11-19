@@ -37,6 +37,8 @@ public class BattleService {
 
     private void takeTurn(){
         roundCounter++;
+        System.out.println("=========================================================");
+
         System.out.println("Round " + roundCounter);
 
         ArrayList<Player> turnOrder = getRandomPlayerOrder();

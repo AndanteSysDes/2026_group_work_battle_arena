@@ -9,9 +9,9 @@ public class BattleResult {
     private int totalRounds;
 
     public BattleResult(String userName, String userCharacter, String computerCharacter, String winner, int totalRounds) {
-        userName = userName;
-        userCharacter = userCharacter;
-        computerCharacter = computerCharacter;
+        this.userName = userName;
+        this.userCharacter = userCharacter;
+        this.computerCharacter = computerCharacter;
         this.winner = winner;
         this.totalRounds = totalRounds;
     }
