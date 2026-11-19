@@ -3,31 +3,26 @@ package model;
 import java.util.Random;
 
 public class Warrior extends Fighter{
- private boolean isDefending;
+    private boolean isDefending;
 
     public Warrior(){
         super();
-        this.specialAbility =ActionType.DEFENCE;
-        this.maxHp =120;
+        this.name = "Warrior";
+        this.maxHp = 120;
         this.currentHp = this.maxHp;
-        this.isDefending = false;
-
-    }
-
-    @Override
-    public int attack(){
-        Random random = new Random();
-        int attackPoint = random.nextInt(5,16);
-        return attackPoint;
+        this.specialAbility = ActionType.DEFENCE;
+        this.minAttackPoint = 5;
+        this.maxAttackPoint = 15;
     }
 
     @Override
     public void takeDamage(int damage){
         if(isDefending){
-            damage = damage / 2;
+            super.takeDamage(damage/2);
             isDefending = false;
+        }else{
+            super.takeDamage(damage);
         }
-        this.currentHp = Math.max(0,this.currentHp - damage);
     }
 
     @Override
