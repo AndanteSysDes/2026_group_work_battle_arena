@@ -3,8 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class WarriorTest {
 
@@ -16,6 +16,7 @@ class WarriorTest {
     }
 
     // HP
+
     @Test
     void currentHPShouldBeSameAsMaxHPAtFirst(){
         int currentHP = warrior.getCurrentHp();
@@ -80,13 +81,8 @@ class WarriorTest {
         assertEquals(0, warrior.getCurrentHp());
     }
 
-//    @Test
-//    void warriorShouldTakeNormalDamageWithoutDefend(){
-//        warrior.takeDamage(20);
-//        assertEquals(100, warrior.getCurrentHp());
-//    }
-
     //Special Ability Defend
+
     @Test
     void warriorShouldHaveSpecialAbilityIsDefend(){
         assertEquals(ActionType.DEFENCE,warrior.getSpecialAbility());
@@ -116,15 +112,25 @@ class WarriorTest {
 
         assertEquals(100, warrior.getCurrentHp());
     }
+
     @Test
-    void attack() {
+    void hasSpecialAbilityUsedShouldReturnTrueAfterUsingSpecialAbility(){
+        assertFalse(warrior.hasSpecialAbilityUsed);
+        warrior.useAbility();
+        assertTrue(warrior.hasSpecialAbilityUsed);
     }
 
     @Test
-    void takeDamage() {
+    void isAliveShouldReturnTrueIfCurrentHPIsGreaterThan0(){
+        warrior.setCurrentHp(150);
+        assertTrue(warrior.isAlive());
     }
 
     @Test
-    void useAbility() {
+    void isAliveShouldReturnFalseIfCurrentHPIs0(){
+        warrior.setCurrentHp(0);
+        assertFalse(warrior.isAlive());
     }
+
+
 }

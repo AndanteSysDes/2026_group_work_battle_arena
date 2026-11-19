@@ -16,24 +16,22 @@ public class Warrior extends Fighter{
 
     @Override
     public int attack(){
-        // skriv någonting
         Random random = new Random();
         int attackPoint = random.nextInt(5,16);
         return attackPoint;
     }
+
     @Override
     public void takeDamage(int damage){
-        // skriv någonting
-
         if(isDefending){
             damage = damage / 2;
             isDefending = false;
         }
         this.currentHp = Math.max(0,this.currentHp - damage);
     }
+
     @Override
     public int useAbility(){
-        // skriv någonting
         isDefending = true;
         hasSpecialAbilityUsed =true;
         return 0;
