@@ -1,5 +1,6 @@
 package game;
 
+import model.Fighter;
 import model.Mage;
 import model.Ranger;
 import model.Warrior;
@@ -18,25 +19,26 @@ public class AutoPlayer extends Player {
 
     @Override
     public void inputName(){
-        this.name = "AutoPlayer";
+        setName("AutoPlayer");
     }
 
     @Override
     // Det kan vara privat
     public void chooseFighter(){
         int selectValue =  random.nextInt(3);
-        this.fighter = switch (selectValue) {
+        Fighter fighter = switch (selectValue) {
             case 0 -> new Warrior();
             case 1 -> new Mage();
             case 2 -> new Ranger();
             default -> throw new IllegalStateException("Unexpected value: " + selectValue);
         };
+        setFighter(fighter);
     }
 
     @Override
     public int inputCommand(){
         int selectValue;
-        if(fighter.isHasSpecialAbilityUsed()){
+        if(getFighter().isHasSpecialAbilityUsed()){
             return 1;
         }
 

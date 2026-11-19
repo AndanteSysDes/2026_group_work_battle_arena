@@ -16,16 +16,14 @@ class AutoPlayerTest {
     void chooseFighterShouldChooseWarriorWithAOneInThreeProbability(){
         autoPlayer = new AutoPlayer(new FixedRandomForFighter(0));
 
-        // need to change autoPlayer.fighter -> autoPlayer.getFighter()
-        assertEquals(Warrior.class, autoPlayer.fighter.getClass());
+        assertEquals(Warrior.class, autoPlayer.getFighter().getClass());
     }
 
     @Test
     void chooseFighterShouldChooseMageWithAOneInThreeProbability(){
         autoPlayer = new AutoPlayer(new FixedRandomForFighter(1));
 
-        // need to change autoPlayer.fighter -> autoPlayer.getFighter()
-        assertEquals(Mage.class, autoPlayer.fighter.getClass());
+        assertEquals(Mage.class, autoPlayer.getFighter().getClass());
 
     }
 
@@ -33,8 +31,7 @@ class AutoPlayerTest {
     void chooseFighterShouldChooseRangerWithAOneInThreeProbability(){
         autoPlayer = new AutoPlayer(new FixedRandomForFighter(2));
 
-        // need to change autoPlayer.fighter -> autoPlayer.getFighter()
-        assertEquals(Ranger.class, autoPlayer.fighter.getClass());
+        assertEquals(Ranger.class, autoPlayer.getFighter().getClass());
     }
 
     @Test
@@ -85,7 +82,7 @@ class AutoPlayerTest {
 
         autoPlayer = new AutoPlayer(new FixedRandomForCommand(2));
 
-        Fighter fighter = autoPlayer.fighter;
+        Fighter fighter = autoPlayer.getFighter();
         fighter.setHasSpecialAbilityUsed(true);
         int selectValue = autoPlayer.inputCommand();
 
