@@ -7,23 +7,12 @@ public class Mage extends Fighter{
 
     public Mage() {
         super();
-        this.specialAbility = ActionType.HEAL;
+        this.name = "Mage";
         this.maxHp = 90;
         this.currentHp = this.maxHp;
-    }
-
-
-
-    @Override
-    public int attack(){
-        Random random = new Random();
-        int attackPoint = random.nextInt(3,14);
-        return attackPoint;
-    }
-
-    @Override
-    public void takeDamage(int damage){
-        currentHp = Math.max(0, currentHp-damage);
+        this.specialAbility = ActionType.HEAL;
+        this.minAttackPoint = 3;
+        this.maxAttackPoint = 13;
     }
 
     @Override
