@@ -16,13 +16,20 @@ public class Warrior extends Fighter{
     }
 
     @Override
-    public void takeDamage(int damage){
-        if(isDefending){
-            super.takeDamage(damage/2);
-            isDefending = false;
-        }else{
-            super.takeDamage(damage);
+    public int takeDamage(int damage){
+        if(damage == 0){
+            return 0;
         }
+
+        int actualDamage = damage;
+
+        if(isDefending){
+            actualDamage = damage/2;
+//            super.takeDamage(damage/2);
+            isDefending = false;
+        }
+        return super.takeDamage(actualDamage);
+
     }
 
     @Override
