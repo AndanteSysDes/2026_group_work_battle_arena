@@ -114,10 +114,10 @@ public class Player {
         String input;
 
         while (true) {
-            boolean specialabilityused = fighter != null && fighter.isHasSpecialAbilityUsed();
+            boolean specialAbilityUsed = fighter != null && fighter.isHasSpecialAbilityUsed();
             System.out.println("Välj handling : ");
             System.out.println("1. Vanlig attack");
-            if(specialabilityused) {
+            if(specialAbilityUsed) {
                 System.out.println(MessageForUsedAbility);
             }
             else {
@@ -139,7 +139,7 @@ public class Player {
             if (input.equals("1")) {
                 return 1;
             } else if (input.equals("2")) {
-                if (specialabilityused) {
+                if (specialAbilityUsed) {
                     System.out.println(MessageForUsedAbility);
                     continue;
                 }
