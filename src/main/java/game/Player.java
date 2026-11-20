@@ -114,16 +114,17 @@ public class Player {
         String input;
 
         while (true) {
-            boolean specialabilityused;
+            boolean specialabilityused = fighter != null && fighter.isHasSpecialAbilityUsed();
             System.out.println("Välj handling : ");
             System.out.println("1. Vanlig attack");
-            System.out.println("2. Specialförmåga");
+            if(specialabilityused) {
+                System.out.println(MessageForUsedAbility);
+            }
+            else {
+                System.out.println("2. Specialförmåga");
+            }
             System.out.println(" Skriv ditt kommando : ");
 
-//            if(specialabilityused) {
-//                System.out.println(MessageForUsedAbility);
-//            }
-//
 
             if (!scanner.hasNextLine()) {
                 // User inputs EOF. We will think about it later...
@@ -139,7 +140,7 @@ public class Player {
                 return 1;
             } else if (input.equals("2")) {
                 if (fighter != null && fighter.isHasSpecialAbilityUsed()) {
-                    System.out.println(MessageForError);
+                    System.out.println(MessageForUsedAbility);
                     continue;
                 }
                 int selectValue = Integer.parseInt(input);
