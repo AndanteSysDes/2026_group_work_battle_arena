@@ -46,7 +46,7 @@ public class Player {
         while (true) {
             System.out.println("Ange ditt namn: ");
 
-            if(!scanner.hasNextLine()) {
+            if (!scanner.hasNextLine()) {
                 // User inputs EOF. We will think about it later...
                 System.out.println("Inmatningen avslutades.");
                 return;
@@ -80,7 +80,7 @@ public class Player {
             System.out.println("3. Ranger har specialförmåga -> 105 HP, Precise Shot");
             System.out.println("Välj ditt karaktär: ");
 
-            if(!scanner.hasNextLine()) {
+            if (!scanner.hasNextLine()) {
                 // User inputs EOF. We will think about it later...
                 System.out.println("Inmatningen avslutades.");
                 return;
@@ -110,34 +110,43 @@ public class Player {
         String MessageForNullValue = "Inmatningen avslutades.";
         String MessageForInvalidValue = "Du måste skriva en siffra.";
         String MessageForError = "Ett problem uppstod. Försök igen.";
+        String MessageForUsedAbility = "Specialförmågan är redan använd.";
         String input;
 
         while (true) {
-
+            boolean specialabilityused;
             System.out.println("Välj handling : ");
             System.out.println("1. Vanlig attack");
             System.out.println("2. Specialförmåga");
             System.out.println(" Skriv ditt kommando : ");
 
-            if(!scanner.hasNextLine()) {
+//            if(specialabilityused) {
+//                System.out.println(MessageForUsedAbility);
+//            }
+//
+
+            if (!scanner.hasNextLine()) {
                 // User inputs EOF. We will think about it later...
                 System.out.println(MessageForNullValue);
                 return -1;
             }
 
             input = scanner.nextLine().trim();
-            if (input.equals("1") || input.equals("2")) {
 
-                try {
-                    int selectValue = Integer.parseInt(input);
-                    return selectValue;
-                } catch (NumberFormatException e) {
+
+
+            if (input.equals("1")) {
+                return 1;
+            } else if (input.equals("2")) {
+                if (fighter != null && fighter.isHasSpecialAbilityUsed()) {
                     System.out.println(MessageForError);
                     continue;
                 }
+                int selectValue = Integer.parseInt(input);
+                return selectValue;
+
             }
             System.out.println(MessageForInvalidValue);
-
         }
     }
 }
