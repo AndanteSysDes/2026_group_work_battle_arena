@@ -6,15 +6,11 @@ import java.util.*;
 
 public class BattleService {
 
-    private Random random;
-    private Player player;
-    private Player autoPlayer;
     private int roundCounter;
-
-//    private HashMap<Integer, String> commandMenu;
-
-
     private BattleResult battleResult;
+    private Random random;
+    Player player;
+    Player autoPlayer;
 
 
     public BattleService(Random random, Player player, Player autoPlayer) {
@@ -27,15 +23,15 @@ public class BattleService {
 //        commandMenu.put(2, "Specialförmåga");
     }
 
-    public void battle(){
+    public void battle() {
         System.out.println("Battle Started!!");
-        while(!hasWinner()){
+        while (!hasWinner()) {
             takeTurn();
         }
         setBattleResult();
     }
 
-    private void takeTurn(){
+    private void takeTurn() {
         roundCounter++;
         System.out.println("=========================================================");
 
@@ -43,7 +39,7 @@ public class BattleService {
 
         ArrayList<Player> turnOrder = getRandomPlayerOrder();
 
-        for(Player turnPlayer : turnOrder){
+        for (Player turnPlayer : turnOrder) {
             showStatus();
 
             System.out.println(turnPlayer.getName() + "s tur.");
@@ -59,14 +55,14 @@ public class BattleService {
                 }
             }
 
-            if(hasWinner()){
+            if (hasWinner()) {
                 System.out.println("Matchen är slut!!");
                 return;
             }
         }
     }
 
-    public boolean hasWinner(){
+    public boolean hasWinner() {
         return !(player.getFighter().isAlive() && autoPlayer.getFighter().isAlive());
     }
 
@@ -75,46 +71,46 @@ public class BattleService {
             Player defender,
             ActionType type,
             int damage
-    ){
-        String MessageForNormalAttack = attacker.getName() + " har attackerat "+ defender.getName() +".";
+    ) {
+        String MessageForNormalAttack = attacker.getName() + " har attackerat " + defender.getName() + ".";
         String MessageForDamageTaker = defender.getName() + " fick " + damage + " skadepoäng";
         String MessageForSpecialAbility = attacker.getName() + " har använt " + type.toString() + ".";
         String MessageForDefence = attacker.getName() + " halverar skadan från nästa inkommande attack.";
         String MessageForHeal = attacker.getName() + " återfår 15 HP.";
         String MessageForPreciseShot =
-                "Pilen "+attacker.getName()+" sköt träffade "+ defender.getName() +"s vitala punkt!\n"
-                + MessageForDamageTaker;
+                "Pilen " + attacker.getName() + " sköt träffade " + defender.getName() + "s vitala punkt!\n"
+                        + MessageForDamageTaker;
 
-        if(type==ActionType.ATTACK){
+        if (type == ActionType.ATTACK) {
             System.out.println(MessageForNormalAttack);
             System.out.println(MessageForDamageTaker);
-        }else{
+        } else {
             System.out.println(MessageForSpecialAbility);
 
-            switch (type){
-                case DEFENCE ->   System.out.println(MessageForDefence);
-                case HEAL ->  System.out.println(MessageForHeal);
-                case PRECISE_SHOT ->  System.out.println(MessageForPreciseShot);
+            switch (type) {
+                case DEFENCE -> System.out.println(MessageForDefence);
+                case HEAL -> System.out.println(MessageForHeal);
+                case PRECISE_SHOT -> System.out.println(MessageForPreciseShot);
                 case null, default -> throw new IllegalStateException("Unexpected value: " + type);
             }
         }
 
     }
 
-    private void showStatus(){
+    private void showStatus() {
         System.out.println("---------------------------------------------------------");
 
-        System.out.println(player.getName() + "("+player.getFighter().getName()+")     HP: "
+        System.out.println(player.getName() + "(" + player.getFighter().getName() + ")     HP: "
                 + player.getFighter().getCurrentHp()
         );
-        System.out.println(autoPlayer.getName() + "("+autoPlayer.getFighter().getName()+")     HP: "
+        System.out.println(autoPlayer.getName() + "(" + autoPlayer.getFighter().getName() + ")     HP: "
                 + autoPlayer.getFighter().getCurrentHp()
         );
 
         System.out.println("---------------------------------------------------------");
     }
 
-    private ArrayList<Player> getRandomPlayerOrder(){
+    private ArrayList<Player> getRandomPlayerOrder() {
         ArrayList<Player> playerOrder = new ArrayList<>(
                 List.of(player, autoPlayer)
         );
@@ -122,15 +118,15 @@ public class BattleService {
         return playerOrder;
     }
 
-    private Player chooseTarget(Player attacker, ArrayList<Player> playerList){
+    private Player chooseTarget(Player attacker, ArrayList<Player> playerList) {
         Player target = playerList.get(random.nextInt(playerList.size()));
-        while(target == attacker){
+        while (target == attacker) {
             target = playerList.get(random.nextInt(playerList.size()));
         }
         return target;
     }
 
-    private void normalAttack(Player attacker, ArrayList<Player> playerList){
+    private void normalAttack(Player attacker, ArrayList<Player> playerList) {
         Player defender = chooseTarget(attacker, playerList);
 
         int damage = attacker.getFighter().attack();
@@ -139,7 +135,7 @@ public class BattleService {
         showBattleProcess(attacker, defender, attacker.getFighter().getNormalAbility(), damage);
     }
 
-    private void specialAttack(Player attacker, ArrayList<Player> playerList){
+    private void specialAttack(Player attacker, ArrayList<Player> playerList) {
         Player defender = chooseTarget(attacker, playerList);
 
         int damage = attacker.getFighter().useAbility();
@@ -148,31 +144,70 @@ public class BattleService {
         showBattleProcess(attacker, defender, attacker.getFighter().getSpecialAbility(), damage);
     }
 
-    private Player setBattleResult(){
-        if(!hasWinner()){
+    private void setBattleResult() {
+        if (!hasWinner()) {
             // TODO: need to throw something
-            return null;
+            return;
         }
 
         Player winner;
-        if(player.getFighter().isAlive()){
+        if (player.getFighter().isAlive()) {
             winner = player;
-        }else {
+        } else {
             winner = autoPlayer;
         }
 
         String userName = player.getName();
         String userCharacter = player.getFighter().getName();
         String computerCharacter = autoPlayer.getFighter().getName();
-
-
         int totalRounds = roundCounter;
 
-        this.battleResult = new BattleResult(userName, userCharacter, computerCharacter, winner.getName(), totalRounds);
-        return winner;
+        this.battleResult = new BattleResult(
+                userName,
+                userCharacter,
+                computerCharacter,
+                winner.getName(),
+                totalRounds
+        );
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player getAutoPlayer() {
+        return autoPlayer;
+    }
+
+    public void setAutoPlayer(Player autoPlayer) {
+        this.autoPlayer = autoPlayer;
+    }
+
+    public int getRoundCounter() {
+        return roundCounter;
+    }
+
+    public void setRoundCounter(int roundCounter) {
+        this.roundCounter = roundCounter;
     }
 
     public BattleResult getBattleResult() {
         return battleResult;
+    }
+
+    public void setBattleResult(BattleResult battleResult) {
+        this.battleResult = battleResult;
     }
 }
