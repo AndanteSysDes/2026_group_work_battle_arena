@@ -1,10 +1,13 @@
 package game;
 
+import java.util.Random;
+
 public class Game {
 
     private Player player;
     private Player autoPlayer;
     private BattleService battleService;
+    private BattleResult battleResult;
 
      public Game(){
 
@@ -34,22 +37,73 @@ public class Game {
         this.battleService = battleService;
     }
 
-    public void start(){
-        // skriv någonting
+    public BattleResult getBattleResult() {
+        return battleResult;
+    }
+
+    public void setUpPlayer(){
+        //skapa instanser player och autoplayer
+        //sätta dem variable
+        player =new Player();
+        player.inputName();
+        player.chooseFighter();
+
+        autoPlayer = new AutoPlayer(new Random());
+        autoPlayer.inputName();
+        autoPlayer.chooseFighter();
+
+    }
+
+    public void start() throws IllegalAccessException {
+
+//        Skapa BattleService och ge Player och AutoPlayer till BattleService
+//        anropar BattleService.battle() metod och tar emot BattleResult.
+//
+         if(player == null || autoPlayer == null){
+             throw new IllegalAccessException("Anropa setUpPlayers() innan start()");
+         }
+         battleService = new BattleService(new Random(),player,autoPlayer);
+         battleService.battle();
+         battleResult = battleService.getBattleResult();
+
+
      }
 
      public void showBattleResult(){
-         // skriv någonting
+         // Tar emot result från BattleService och visa vem som vann
+
+         if(battleResult == null){
+             System.out.println("Ingen strid har spelats ännu.");
+             return;
+         }
+
+         System.out.println("Battle resultat är ");
+         System.out.println("Spelare :" + battleResult.getUserName()
+                 +" " + battleResult.getUserCharacter() );
+         System.out.println("Auto Player :" + battleResult.getComputerCharacter());
+         System.out.println("Antal rundor :" + battleResult.getTotalRounds());
+         System.out.println("Vinnare :" + battleResult.getWinner());
+
+         //Player winner = battleResult.getWinner();
+//         if(winner == null){
+//             System.out.println("Striden slutade oavgjort.");
+//         }
+//         else{
+//             System.out.println("Vinnare : " + winner.getName());
+//         }
      }
 
      public void saveBattleResult(){
-         // skriv någonting
+         // anropa Client klass, ger BattleService, och fråga Client klass om spara data.
+
+         if(battleService == null){
+             System.out.println("Det finns inget resultat att spara.");
+             return;
+         }
+//         Client client = new Client(battleService);
+//         client.askTosave();
      }
 
-     public void setUpPlayer(){
-         //skapa instanser player och autoplayer
-         //sätta dem variable
 
-     }
 
 }
