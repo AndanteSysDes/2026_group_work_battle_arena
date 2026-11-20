@@ -49,8 +49,8 @@ public class Game {
         player.chooseFighter();
 
         autoPlayer = new AutoPlayer(new Random());
-        autoPlayer.inputName();
-        autoPlayer.chooseFighter();
+//        autoPlayer.inputName();     // AutoPlayer constructor did it, so it's not needed.
+//        autoPlayer.chooseFighter();     // AutoPlayer constructor did it, so it's not needed.
 
     }
 
