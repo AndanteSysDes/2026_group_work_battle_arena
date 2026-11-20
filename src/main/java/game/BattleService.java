@@ -130,18 +130,18 @@ public class BattleService {
         Player defender = chooseTarget(attacker, playerList);
 
         int damage = attacker.getFighter().attack();
-        defender.getFighter().takeDamage(damage);
+        int actualDamage = defender.getFighter().takeDamage(damage);
 
-        showBattleProcess(attacker, defender, attacker.getFighter().getNormalAbility(), damage);
+        showBattleProcess(attacker, defender, attacker.getFighter().getNormalAbility(), actualDamage);
     }
 
     private void specialAttack(Player attacker, ArrayList<Player> playerList) {
         Player defender = chooseTarget(attacker, playerList);
 
         int damage = attacker.getFighter().useAbility();
-        defender.getFighter().takeDamage(damage);
+        int actualDamage = defender.getFighter().takeDamage(damage);
 
-        showBattleProcess(attacker, defender, attacker.getFighter().getSpecialAbility(), damage);
+        showBattleProcess(attacker, defender, attacker.getFighter().getSpecialAbility(), actualDamage);
     }
 
     private void setBattleResult() {
