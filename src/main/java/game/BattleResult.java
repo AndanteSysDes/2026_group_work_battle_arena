@@ -2,11 +2,11 @@ package game;
 
 public class BattleResult {
 
-    private String userName;
-    private String userCharacter;
-    private String computerCharacter;
-    private String winner;
-    private int totalRounds;
+    private final String userName;
+    private final String userCharacter;
+    private final String computerCharacter;
+    private final String winner;
+    private final int totalRounds;
 
     public BattleResult(String userName, String userCharacter, String computerCharacter, String winner, int totalRounds) {
         this.userName = userName;
