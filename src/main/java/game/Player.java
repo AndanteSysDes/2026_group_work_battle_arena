@@ -139,7 +139,7 @@ public class Player {
             if (input.equals("1")) {
                 return 1;
             } else if (input.equals("2")) {
-                if (fighter != null && fighter.isHasSpecialAbilityUsed()) {
+                if (specialabilityused) {
                     System.out.println(MessageForUsedAbility);
                     continue;
                 }
