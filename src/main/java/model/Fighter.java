@@ -77,8 +77,12 @@ public abstract class Fighter implements SpecialAbility{
         return attackPoint;
     };
 
-    public void takeDamage( int damage ){
+    public int takeDamage( int damage ){
+
         this.currentHp =Math.max(0, this.currentHp- damage);
+
+        return damage;
+
     };
 
     public boolean isAlive(){
