@@ -101,7 +101,25 @@ class GameTest {
     // saveBattleResult() -> We'll think later.
 }
 
-   // @Test
+   @Test
+    void startShouldCreateBattleService() throws IllegalAccessException {
+       Player player = new Player(new Scanner("1\n"));
+       player.setName("TestPlayer");
+       player.setFighter(new Warrior());
+
+       Player autoPlayer = new AutoPlayer(new Random());
+       autoPlayer.setName("AutoPlayer");
+
+       game.setPlayer(player);
+       game.setAutoPlayer(autoPlayer);
+
+       game.start();
+       game.getBattleResult();
+       assertNotNull(game.getBattleService());
+
+
+   }
+
 
 
 
