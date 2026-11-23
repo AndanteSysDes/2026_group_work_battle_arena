@@ -72,11 +72,11 @@ class PlayerTest {
 
     @Test
     void inputCommandShouldNotAllowSpecialAbilityIfAlreadyUsed(){
-        player = new Player(new Scanner("1\n2\n1\n"));
-        player.chooseFighter();
+        player = new Player(new Scanner("2\n1"));
+        player.setFighter(new Warrior());
         player.getFighter().setHasSpecialAbilityUsed(true);
 
-        assertEquals(2,player.inputCommand());
+        assertEquals(1,player.inputCommand());
     }
 
 
