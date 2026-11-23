@@ -1,13 +1,79 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  IO.println(String.format("Hello and welcome!"));
+import game.Game;
 
-  for (int i = 1; i <= 5; i++) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    IO.println("i = " + i);
-  }
+public Scanner in = new Scanner(System.in);
+
+void main() {
+    showWelcomeMessage();
+
+    while (true) {
+      showMenu();
+      int userInput = takeUserInput(in);
+      switch (userInput) {
+        case 1 -> startGame();
+        case 2 -> showHistory();
+        case 0 -> end();
+      }
+    }
+
+}
+
+private int takeUserInput(Scanner in) {
+
+    while (true) {
+        System.out.print("DITT VAL : ");
+
+        if (!in.hasNextLine()) {
+            // TODO User inputs EOF. We will think about it later...
+            System.out.println("Inmatningen har avbrutits.");
+            return 0;
+        }
+
+        String userInput = in.nextLine().trim();
+        switch (userInput) {
+            case "0":
+                return 0;
+            case "1":
+                return 1;
+            case "2":
+                return 2;
+            default:
+                System.out.println("Ogiltig inmatning. Pröva igen.");
+        }
+    }
+}
+
+private void showMenu() {
+    System.out.println("=========================================================");
+    System.out.println("Välj följande meny:");
+    System.out.println("1. Starta spelet");
+    System.out.println("2. Visa spelhistoriken");
+    System.out.println("0. Avsluta spelet.");
+}
+
+private void showWelcomeMessage() {
+    System.out.println("Välkommen till Battle Arena spelet!");
+}
+
+private void startGame() {
+  System.out.println(" -- startGame -- ");
+  Game game = new Game();
+
+  game.setUpPlayer();
+  game.start();
+  game.showBattleResult();
+  game.saveBattleResult();
+
+}
+
+private void showHistory() {
+  // TODO Think later with Client-Server system.
+  System.out.println(" -- showHistory -- ");
+
+}
+
+private void end() {
+  System.out.println("Hej då!");
+  in.close();
+  System.exit(0);
+
 }
