@@ -84,13 +84,7 @@ public class Game {
          System.out.println("Antal rundor :" + battleResult.getTotalRounds());
          System.out.println("Vinnare :" + battleResult.getWinner());
 
-         //Player winner = battleResult.getWinner();
-//         if(winner == null){
-//             System.out.println("Striden slutade oavgjort.");
-//         }
-//         else{
-//             System.out.println("Vinnare : " + winner.getName());
-//         }
+
      }
 
      public void saveBattleResult(){
