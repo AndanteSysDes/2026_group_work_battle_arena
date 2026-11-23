@@ -76,20 +76,38 @@ public class Client {
 
         ArrayList<BattleResult> results = new ArrayList<>();
         try {
+            createReaderAndWriter();
+            out.println("LOAD");
+
+            String line;
+            while ((line = in.readLine()) != null) {
+                BattleResult result ;
+                if (line != null) {
+                    results.add(result);
+                }
+            }
 
         }
+        catch (IOException e){
+            System.out.println("Server error" + e.getMessage());
+        }
 
-        return new ArrayList<>();
+        return results;
+        //return new ArrayList<>();
 
 
     }
 
-    static String toData(BattleResult battleResult) {
+    public static String toData(BattleResult battleResult) {
         return battleResult.getUserName() + ","
                 + battleResult.getUserCharacter() + ","
                 + battleResult.getComputerCharacter() + ","
                 + battleResult.getWinner() + ","
                 + battleResult.getTotalRounds();
+    }
+
+    public void close(){
+
     }
 
 
