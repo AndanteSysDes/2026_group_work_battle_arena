@@ -18,6 +18,7 @@ public class Client {
     }
 
     public void createReaderAndWriter() throws IOException {
+        socket = new Socket("127.0.0.1", 8080);
         if(in == null) {
             in = new BufferedReader
                     (new InputStreamReader
@@ -53,14 +54,11 @@ public class Client {
         String response = in.readLine();
         System.out.println("Server response : " + response);
 
-        out.println(response);
+        out.println(toData(battleResult));
+        String response2 = in.readLine();
 
 
-
-
-
-
-        return "";
+        return response2;
     }
 
     public ArrayList<BattleResult> load() throws IOException {
@@ -81,9 +79,9 @@ public class Client {
 
             String line;
             while ((line = in.readLine()) != null) {
-                BattleResult result ;
+                BattleResult result = ;
                 if (line != null) {
-                    results.add(result);
+                    results.add(new BattleResult());
                 }
             }
 
@@ -107,7 +105,13 @@ public class Client {
     }
 
     public void close(){
-
+        if(socket!=null){
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
