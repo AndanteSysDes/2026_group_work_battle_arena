@@ -46,7 +46,7 @@ class GameTest {
     }
 
     @Test
-    void afterStartGameShouldHaveBattleResult() throws IllegalAccessException {
+    void afterStartGameShouldHaveBattleResult(){
 
     Player player = new Player(new Scanner("1\n"));
     player.setName("TestPlayer");
@@ -63,7 +63,7 @@ class GameTest {
     }
 
    @Test
-    void gameShouldHaveBattleService() throws IllegalAccessException {
+    void gameShouldHaveBattleService(){
 
        Player player = new Player(new Scanner("1\n"));
        player.setName("TestPlayer");
