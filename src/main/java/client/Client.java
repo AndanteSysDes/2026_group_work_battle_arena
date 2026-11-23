@@ -2,8 +2,7 @@ package client;
 
 import game.BattleResult;
 
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class Client {
         this.socket = socket;
     }
 
-    public String save(BattleResult battleResult) {
+    public String save(BattleResult battleResult) throws IOException {
         /*
          TODO:
           Skicka meddelande "SAVE" till Server.
@@ -29,10 +28,29 @@ public class Client {
           (Det lyckas att spara data, eller inte.)
          */
 
+
+            if(in == null) {
+                in = new BufferedReader
+                        (new InputStreamReader
+                                (socket.getInputStream()));
+            }
+
+            if(out == null) {
+                out = new PrintWriter
+                        (new OutputStreamWriter
+                                (socket.getOutputStream()),true);
+            }
+            out.println("SAVE");
+            String response = in.readLine();
+            System.out.println("Server response : " + response);
+
+
+
+
         return "";
     }
 
-    public ArrayList<BattleResult> load(){
+    public ArrayList<BattleResult> load() throws IOException {
 
         /*
          TODO:
@@ -42,6 +60,8 @@ public class Client {
           Clienten ska skapa BattleResult instanser från text datan.(använd "," för dela orden)
           Och sedan skapa ArrayList<BattleResult> och returnera den.
          */
+
+        ArrayList<BattleResult> results = new ArrayList<>();
 
         return new ArrayList<>();
     }
