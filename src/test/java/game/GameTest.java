@@ -23,7 +23,7 @@ class GameTest {
     }
 
     @Test
-    void startShouldSetBattleResult() {
+    void testSetUpPlayer() {
         String input = "TestPlayer\n1\n";
 
         InputStream originalIn = System.in;
@@ -46,7 +46,7 @@ class GameTest {
     }
 
     @Test
-    void afterStartGameShouldHaveBattleResult(){
+    void gameShouldTestStartAndShowBattleResult(){
 
     Player player = new Player(new Scanner("1\n"));
     player.setName("TestPlayer");
@@ -63,7 +63,7 @@ class GameTest {
     }
 
    @Test
-    void gameShouldHaveBattleService(){
+    void gameShouldHaveTestBattleService(){
 
        Player player = new Player(new Scanner("1\n"));
        player.setName("TestPlayer");
