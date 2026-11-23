@@ -42,25 +42,19 @@ public class Game {
     }
 
     public void setUpPlayer(){
-        //skapa instanser player och autoplayer
-        //sätta dem variable
+
         player =new Player();
         player.inputName();
         player.chooseFighter();
 
         autoPlayer = new AutoPlayer(new Random());
-//        autoPlayer.inputName();     // AutoPlayer constructor did it, so it's not needed.
-//        autoPlayer.chooseFighter();     // AutoPlayer constructor did it, so it's not needed.
 
     }
 
-    public void start() throws IllegalAccessException {
+    public void start(){
 
-//        Skapa BattleService och ge Player och AutoPlayer till BattleService
-//        anropar BattleService.battle() metod och tar emot BattleResult.
-//
          if(player == null || autoPlayer == null){
-             throw new IllegalAccessException("Anropa setUpPlayers() innan start()");
+             setUpPlayer();
          }
          battleService = new BattleService(new Random(),player,autoPlayer);
          battleService.battle();
@@ -70,7 +64,6 @@ public class Game {
      }
 
      public void showBattleResult(){
-         // Tar emot result från BattleService och visa vem som vann
 
          if(battleResult == null){
              System.out.println("Ingen strid har spelats ännu.");
@@ -97,7 +90,4 @@ public class Game {
 //         Client client = new Client(battleService);
 //         client.askTosave();
      }
-
-
-
 }
