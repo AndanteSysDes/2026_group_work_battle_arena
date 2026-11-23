@@ -109,7 +109,6 @@ public class Player {
 
         String MessageForNullValue = "Inmatningen avslutades.";
         String MessageForInvalidValue = "Du måste skriva en siffra.";
-        String MessageForError = "Ett problem uppstod. Försök igen.";
         String MessageForUsedAbility = "Specialförmågan är redan använd.";
         String input;
 
