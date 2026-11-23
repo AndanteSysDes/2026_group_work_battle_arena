@@ -1,14 +1,13 @@
 package server;
 
 import game.BattleResult;
+import game.BattleResultConverter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
     private final Socket socket;
@@ -29,21 +28,22 @@ public class ClientHandler implements Runnable {
             String message;
 
             while((message = in.readLine()) != null) {
-                if(message.equals("SAVE")){
-                    out.println("Accept save request");
-                    if((message = in.readLine()) != null){
-                        String result = save(message);
-                        out.println(result);
-                        System.out.println("Save success.");
-                        break;
+
+                switch (message) {
+                    case "SAVE" -> {
+                        out.println("Accept save request");
+                        if((message = in.readLine()) != null){
+                            String result = save(message);
+                            out.println(result);
+                        }
                     }
-                } else if(message.equals("LOAD")){
-                    String loadData = load();
-                    out.println(loadData);
-                    System.out.println("load success.");
-                    break;
-                } else {
-                    out.println("Invalid request");
+                    case "LOAD" -> {
+                        String loadData = load();
+                        out.println(loadData);
+                    }
+                    default -> {
+                        out.println("Invalid request");
+                    }
                 }
             }
 
@@ -53,24 +53,27 @@ public class ClientHandler implements Runnable {
     }
 
     private String save(String latestData){
-        /*
-         TODO
-         Check if the data structure is correct.
-         if not, return  "Invalid data structure"
-         otherwise call FileIo.save().
-         */
+        try{
+            BattleResult saveData = BattleResultConverter.parse(latestData);
+            String result = fileIo.save(saveData);
 
-        String[] data = latestData.split(",");
+            return result;
 
-
-
-
-        return "TEST SAVE SUCCESS";
+        } catch (IllegalArgumentException e) {
+            return "The data you sent has invalid data structure: " + e.getMessage();
+        } catch (IOException e) {
+            System.out.println("An error occurred during file saving: " + e.getMessage());
+            return "An error occurred during file saving.";
+        }
     }
 
     private String load(){
-        // TODO
-        // Få ArrayList från FileIO och modifiera den till String.
-        return "TEST LOAD SUCCESS";
+        try{
+            String loadData = fileIo.load();
+            return loadData;
+        } catch (IOException e) {
+            System.out.println("An error occurred during file loading: " + e.getMessage());
+            return "An error occurred during file loading.";
+        }
     }
 }
