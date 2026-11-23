@@ -17,6 +17,21 @@ public class Client {
         this.socket = socket;
     }
 
+    public void createReaderAndWriter() throws IOException {
+        if(in == null) {
+            in = new BufferedReader
+                    (new InputStreamReader
+                            (socket.getInputStream()));
+        }
+
+        if(out == null) {
+            out = new PrintWriter
+                    (new OutputStreamWriter
+                            (socket.getOutputStream()),true);
+        }
+
+    }
+
     public String save(BattleResult battleResult) throws IOException {
         /*
          TODO:
@@ -28,21 +43,19 @@ public class Client {
           (Det lyckas att spara data, eller inte.)
          */
 
+        if (battleResult == null) {
 
-            if(in == null) {
-                in = new BufferedReader
-                        (new InputStreamReader
-                                (socket.getInputStream()));
-            }
+            return "Ingen resultat har sparat.";
+        }
 
-            if(out == null) {
-                out = new PrintWriter
-                        (new OutputStreamWriter
-                                (socket.getOutputStream()),true);
-            }
-            out.println("SAVE");
-            String response = in.readLine();
-            System.out.println("Server response : " + response);
+        createReaderAndWriter();
+        out.println("SAVE");
+        String response = in.readLine();
+        System.out.println("Server response : " + response);
+
+        out.println(response);
+
+
 
 
 
@@ -62,8 +75,21 @@ public class Client {
          */
 
         ArrayList<BattleResult> results = new ArrayList<>();
+        try {
+
+        }
 
         return new ArrayList<>();
+
+
+    }
+
+    static String toData(BattleResult battleResult) {
+        return battleResult.getUserName() + ","
+                + battleResult.getUserCharacter() + ","
+                + battleResult.getComputerCharacter() + ","
+                + battleResult.getWinner() + ","
+                + battleResult.getTotalRounds();
     }
 
 
