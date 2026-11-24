@@ -44,7 +44,9 @@ public class ClientHandler implements Runnable {
                     default -> {
                         out.println("Invalid request");
                     }
+
                 }
+                break;
             }
 
         } catch (IOException e) {
