@@ -86,8 +86,8 @@ public class Server {
                                 return;
                             }
                             switch (request) {
-                                case "SAVE" -> clientSocket.save() ;
-                                case "LOAD" ->  clientSocket.load();
+                                case "SAVE" -> ;//clientSocket.save() ;
+                                case "LOAD" ->  ;//clientSocket.load();
                                 default -> System.out.println("Invalid request"); ;
                             }
 
