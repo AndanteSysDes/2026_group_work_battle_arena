@@ -7,36 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    private int index = 0;
 
-  /*  public  Server(){
-        try {
-            Server server = new ServerSocket(8080);
-            while (true) initConnections();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    private void initConnections(){
-        Socket clientSocket =server.accept();
-
-        if(clientSocket.isConnected())
-            new Thread(() ->{
-                index++;
-                System.out.println("New Client connected");
-                ConnectedClient client = new ConnectedClient( clientSocket, index);
-                try {
-                    client.readMessages();
-                    client.close();
-                    System.out.println("Client Disconnected");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }).start();
-
-    }*/
     public static void main(String[] args) {
 
         ExecutorService pool = Executors.newFixedThreadPool(10);
@@ -67,40 +38,35 @@ public class Server {
 
             while (true) {
 
-                Socket clientSocket = server.accept();
-                //System.out.println("Client is connected");
-                // Phase 1
-                if(clientSocket.isConnected())
-                    new Thread(() ->{
-                       // index++;
-                        System.out.println("New Client connected");
-                        try {
-                            BufferedReader in = new BufferedReader
-                                    (new InputStreamReader
-                                            (clientSocket.getInputStream()));
-                            PrintWriter out = new PrintWriter
-                                    (new OutputStreamWriter
-                                            (clientSocket.getOutputStream()),true);
-                            String request = in.readLine();
-                            if(request == null){
-                                return;
-                            }
-                            switch (request) {
-                                case "SAVE" -> ;//clientSocket.save() ;
-                                case "LOAD" ->  ;//clientSocket.load();
-                                default -> System.out.println("Invalid request"); ;
-                            }
+                try(Socket clientSocket = server.accept()) {
 
-                            clientSocket.close();
-                            System.out.println("Client Disconnected");
+                    System.out.println("New Client connected" );
 
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                       // ConnectedClient client = new ConnectedClient(clientSocket,index);
 
-                    }).start();
+                    BufferedReader in = new BufferedReader
+                                        (new InputStreamReader
+                                                (clientSocket.getInputStream()));
+                    PrintWriter out = new PrintWriter
+                                        (new OutputStreamWriter
+                                                (clientSocket.getOutputStream()),true);
+                    String request = in.readLine();
+                    if(request == null){
+                        return;
+                    }
 
+                    switch (request) {
+                        case "SAVE" -> System.out.println("SAVE");
+                        case "LOAD" -> System.out.println("LOAD");
+                        default -> System.out.println("Invalid request");
+                    }
+
+
+                    System.out.println("Client Disconnected");
+
+                }catch (IOException e){
+                    e.printStackTrace();
+
+                }
 
             }
 
