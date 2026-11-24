@@ -46,7 +46,7 @@ class GameTest {
     }
 
     @Test
-    void gameShouldTestStartAndShowBattleResult(){
+    void startShouldSetBattleResult(){
 
     Player player = new Player(new Scanner("1\n"));
     player.setName("TestPlayer");
@@ -63,7 +63,7 @@ class GameTest {
     }
 
    @Test
-    void gameShouldHaveTestBattleService(){
+    void showBattleResultShouldDisplayCorrectly(){
 
        Player player = new Player(new Scanner("1\n"));
        player.setName("TestPlayer");
