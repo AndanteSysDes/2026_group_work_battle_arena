@@ -11,7 +11,13 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-// "FileHandler" class finns i java.util bibliotek, så jag ändrade namnet för den här klassen.
+/**
+ * Handles saving and loading battle results.
+ * Each saved record is terminated with a colon (:).
+ *
+ * Thread-safe when the same instance is shared
+ * among multiple threads.
+ */
 public class FileIO {
     private final Path file;
 
@@ -22,13 +28,21 @@ public class FileIO {
         this.file = file;
     }
 
+    /**
+     * Appends a battle result to the file,
+     * followed by a colon (:).
+     *
+     * @param saveData the battle result to save
+     * @return a confirmation message
+     * @throws IOException if writing to the file fails
+     */
     public synchronized String save(BattleResult saveData) throws IOException {
 
         String saveText = BattleResultConverter.format(saveData);
 
         Files.writeString(
                 file,
-                saveText,
+                saveText +":",
                 StandardOpenOption.CREATE,
                 StandardOpenOption.APPEND
         );
@@ -38,18 +52,15 @@ public class FileIO {
 
     }
 
+    /**
+     * Loads all saved battle results as a single string,
+     * preserving the colon (:) separators.
+     *
+     * @return all saved battle results as a colon-separated string
+     * @throws IOException if reading from the file fails
+     */
     public synchronized String load() throws IOException {
-
-        StringBuilder loadData = new StringBuilder();
-
-        BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
-        String line;
-        while ((line = reader.readLine()) != null) {
-            loadData.append(line);
-            loadData.append("\n");
-        }
-
-        return loadData.toString();
+        return Files.readString(file, StandardCharsets.UTF_8);
     }
 
 }
