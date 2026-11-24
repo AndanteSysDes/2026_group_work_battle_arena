@@ -33,7 +33,6 @@ public class Server {
                 Skapa en ny ClientHandler instans och sätt socket som parameter.
                 anropa pool.execute(clientHandler)
              */
-
             System.out.println("Server started on port 8080");
 
             while (true) {
@@ -55,8 +54,14 @@ public class Server {
                     }
 
                     switch (request) {
-                        case "SAVE" -> System.out.println("SAVE");
-                        case "LOAD" -> System.out.println("LOAD");
+                        case "SAVE" -> {
+                            out.println("SAVE");
+                            String request1 =in.readLine();
+                            System.out.println( request1);
+                            out.println(request1);
+                        }
+                        case "LOAD" -> System.out.println("LOAD");//String värde
+
                         default -> System.out.println("Invalid request");
                     }
 

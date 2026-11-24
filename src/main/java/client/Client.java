@@ -1,6 +1,7 @@
 package client;
 
 import game.BattleResult;
+import game.BattleResultConverter;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,6 +31,18 @@ public class Client {
 
                 String message ="SAVE";
                 out.println(message);
+
+                String response = in.readLine();
+                System.out.println(response);
+
+                String data = BattleResultConverter.format
+                        (new BattleResult
+                        ("player1","Warrior","Mage","player1",20 )  );
+                out.println(data);
+                String response2 = in.readLine();
+                System.out.println(response2);
+
+
 
 
 
