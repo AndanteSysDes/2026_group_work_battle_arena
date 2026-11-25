@@ -2,6 +2,8 @@ package game;
 
 import client.Client;
 
+import java.io.EOFException;
+import java.io.IOException;
 import java.util.Random;
 
 public class Game {
@@ -40,43 +42,37 @@ public class Game {
     }
 
     public void playGame(){
-
-        setUpPlayer();
-
         try{
+            setUpPlayer();
             start();
+            showBattleResult();
+            saveBattleResult();
+
+
         }catch(IllegalStateException e){
             System.out.println(e.getMessage());
             System.out.println("Spelet har avbrutits");
-            return;
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+            System.out.println("Spelet har avbrutits");
         }
-
-        showBattleResult();
-        saveBattleResult();
     }
 
-    protected void setUpPlayer(){
-
+    protected void setUpPlayer() throws EOFException {
         player =new Player();
         player.inputName();
         player.chooseFighter();
-
         autoPlayer = new AutoPlayer(new Random());
-
     }
 
-    protected void start() throws IllegalStateException{
+    protected void start() throws IllegalStateException, IOException {
 
          if(player == null || autoPlayer == null){
              setUpPlayer();
          }
          battleService = new BattleService(new Random(),player,autoPlayer);
-         try{
-             battleService.battle();
-             battleResult = battleService.getBattleResult();
-         } catch(IllegalStateException e){
-             throw e;
-         }
+         battleService.battle();
+         battleResult = battleService.getBattleResult();
 
      }
 

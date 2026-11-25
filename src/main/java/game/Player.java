@@ -5,6 +5,7 @@ import model.Mage;
 import model.Ranger;
 import model.Warrior;
 
+import java.io.EOFException;
 import java.util.Scanner;
 
 public class Player {
@@ -38,8 +39,7 @@ public class Player {
         this.fighter = fighter;
     }
 
-
-    public void inputName() {
+    public void inputName() throws EOFException {
 
         String input;
 
@@ -47,9 +47,7 @@ public class Player {
             System.out.println("Ange ditt namn: ");
 
             if (!scanner.hasNextLine()) {
-                // User inputs EOF. We will think about it later...
-                System.out.println("Inmatningen avslutades.");
-                return;
+                throw new EOFException("Inmatningen avslutades.");
             }
 
             input = scanner.nextLine().trim();
@@ -64,7 +62,7 @@ public class Player {
 
     }
 
-    public void chooseFighter() {
+    public void chooseFighter() throws EOFException {
         String errorMessage = "Ogiltigt val, ange mellan 1 och 3.";
         boolean isInvalidValue = false;
 
@@ -81,9 +79,7 @@ public class Player {
             System.out.println("Välj ditt karaktär: ");
 
             if (!scanner.hasNextLine()) {
-                // User inputs EOF. We will think about it later...
-                System.out.println("Inmatningen avslutades.");
-                return;
+                throw new EOFException("Inmatningen avslutades.");
             }
 
             String input = scanner.nextLine().trim();
@@ -101,13 +97,11 @@ public class Player {
                     isInvalidValue = true;
                 }
             }
-
         }
     }
 
-    public int inputCommand() {
+    public int inputCommand() throws EOFException {
 
-        String MessageForNullValue = "Inmatningen avslutades.";
         String MessageForInvalidValue = "Du måste skriva en siffra.";
         String MessageForUsedAbility = "Specialförmågan är redan använd.";
         String input;
@@ -126,9 +120,7 @@ public class Player {
 
 
             if (!scanner.hasNextLine()) {
-                // User inputs EOF. We will think about it later...
-                System.out.println(MessageForNullValue);
-                return -1;
+                throw new EOFException("Inmatningen avslutades.");
             }
 
             input = scanner.nextLine().trim();
