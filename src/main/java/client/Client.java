@@ -29,7 +29,7 @@ public class Client {
                                 (socket.getInputStream()));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-                String message ="SAVE";
+                /*String message ="SAVE";
                 out.println(message);
 
                 String response = in.readLine();
@@ -40,7 +40,19 @@ public class Client {
                         ("player1","Warrior","Mage","player1",20 )  );
                 out.println(data);
                 String response2 = in.readLine();
-                System.out.println(response2);
+                System.out.println(response2);*/
+
+                String message1 = "LOAD";
+                out.println(message1);
+              //  String receiveData = in.readLine();
+                String response1 = in.readLine();
+                System.out.println(response1);
+
+                //BattleResult result = BattleResultConverter.parse(receiveData);
+                //System.out.println(result);
+
+               // String data1 = BattleResultConverter.parse(new BattleResult());
+
 
 
 
