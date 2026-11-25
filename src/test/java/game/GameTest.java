@@ -55,6 +55,7 @@ class GameTest {
 
     Player autoPlayer = new AutoPlayer(new Random());
     autoPlayer.setName("AutoPlayer");
+    autoPlayer.getFighter().setCurrentHp(2);
 
     game.setPlayer(player);
     game.setAutoPlayer(autoPlayer);
@@ -72,6 +73,8 @@ class GameTest {
 
        Player autoPlayer = new AutoPlayer(new Random());
        autoPlayer.setName("AutoPlayer");
+
+       autoPlayer.getFighter().setCurrentHp(2);
 
        game.setPlayer(player);
        game.setAutoPlayer(autoPlayer);
