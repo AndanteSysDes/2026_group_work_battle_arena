@@ -74,7 +74,7 @@ public class BattleService {
     ) {
         String MessageForNormalAttack = attacker.getName() + " har attackerat " + defender.getName() + ".";
         String MessageForDamageTaker = defender.getName() + " fick " + damage + " skadepoäng";
-        String MessageForSpecialAbility = attacker.getName() + " har använt " + type.toString() + ".";
+        String MessageForSpecialAbility = attacker.getName() + " har använt " + type.getDisplayName() + ".";
         String MessageForDefence = attacker.getName() + " halverar skadan från nästa inkommande attack.";
         String MessageForHeal = attacker.getName() + " återfår 15 HP.";
         String MessageForPreciseShot =

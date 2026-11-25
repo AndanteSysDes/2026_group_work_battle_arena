@@ -101,12 +101,14 @@ class PlayerTest {
         // 1. Normal Attack
         // 2. Special Attack
         player = new Player(new Scanner("1\n"));
+        player.setFighter(new Warrior());
         assertEquals(1, player.inputCommand());
     }
 
     @Test
     void inputCommandShouldReturn2ForSpecialAttack(){
         player = new Player(new Scanner("2\n"));
+        player.setFighter(new Warrior());
         assertEquals(2, player.inputCommand());
     }
 
@@ -117,6 +119,8 @@ class PlayerTest {
 
         int selectValue;
         player = new Player(new Scanner("1\n2\n2\n1\n1\n"));
+        player.setFighter(new Warrior());
+
         for(int i=0 ;i<5 ;i++){
             selectValue = player.inputCommand();
             assertTrue(selectValue == 1

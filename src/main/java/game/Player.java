@@ -1,9 +1,6 @@
 package game;
 
-import model.Fighter;
-import model.Mage;
-import model.Ranger;
-import model.Warrior;
+import model.*;
 
 import java.util.Scanner;
 
@@ -66,6 +63,12 @@ public class Player {
 
     public void chooseFighter() {
         String errorMessage = "Ogiltigt val, ange mellan 1 och 3.";
+        String warriorDescription = "1. Warrior ---  HP:120\n    Specialförmåga: " + ActionType.DEFENCE.getDisplayName()
+                + "\n    " + ActionType.DEFENCE.getDescription() ;
+        String mageDescription = "2. Mage ---  HP:90\n    Specialförmåga: " + ActionType.HEAL.getDisplayName()
+                + "\n    " + ActionType.HEAL.getDescription() ;
+        String rangerDescription = "3. Ranger ---  HP:105\n    Specialförmåga: " + ActionType.PRECISE_SHOT.getDisplayName()
+                + "\n    " + ActionType.PRECISE_SHOT.getDescription() ;
         boolean isInvalidValue = false;
 
         while (fighter == null) {
@@ -74,11 +77,11 @@ public class Player {
             }
             isInvalidValue = false;
 
-            System.out.println(" Karaktär finns:");
-            System.out.println("1. Warrior har specialförmåga-> 120 HP, Defend");
-            System.out.println("2. Mage har specialförmåga -> 90 HP Heal");
-            System.out.println("3. Ranger har specialförmåga -> 105 HP, Precise Shot");
-            System.out.println("Välj ditt karaktär: ");
+            System.out.println("Välj bland följande karaktärer:");
+            System.out.println(warriorDescription);
+            System.out.println(mageDescription);
+            System.out.println(rangerDescription);
+            System.out.print("\nVälj ditt karaktär: ");
 
             if (!scanner.hasNextLine()) {
                 // User inputs EOF. We will think about it later...
@@ -109,20 +112,20 @@ public class Player {
 
         String MessageForNullValue = "Inmatningen avslutades.";
         String MessageForInvalidValue = "Du måste skriva en siffra.";
-        String MessageForUsedAbility = "Specialförmågan är redan använd.";
+        String MessageForUsedAbility = "* Specialförmågan är redan använd.";
         String input;
 
         while (true) {
             boolean specialAbilityUsed = fighter != null && fighter.isHasSpecialAbilityUsed();
             System.out.println("Välj handling : ");
-            System.out.println("1. Vanlig attack");
+            System.out.println("1. " + getFighter().getNormalAbility().getDisplayName());
             if(specialAbilityUsed) {
                 System.out.println(MessageForUsedAbility);
             }
             else {
-                System.out.println("2. Specialförmåga");
+                System.out.println("2. " + getFighter().getSpecialAbility().getDisplayName() + " (Du kan använda bara en gång.)");
             }
-            System.out.println(" Skriv ditt kommando : ");
+            System.out.print("\n Skriv ditt kommando : ");
 
 
             if (!scanner.hasNextLine()) {
