@@ -1,5 +1,7 @@
 package game;
 
+import client.Client;
+
 import java.util.Random;
 
 public class Game {
@@ -71,23 +73,20 @@ public class Game {
          }
 
          System.out.println("Battle resultat är ");
-         System.out.println("Spelare :" + battleResult.getUserName()
-                 +" " + battleResult.getUserCharacter() );
-         System.out.println("Auto Player :" + battleResult.getComputerCharacter());
-         System.out.println("Antal rundor :" + battleResult.getTotalRounds());
-         System.out.println("Vinnare :" + battleResult.getWinner());
+         System.out.println(battleResult);
 
 
      }
 
      public void saveBattleResult(){
-         // anropa Client klass, ger BattleService, och fråga Client klass om spara data.
 
          if(battleService == null){
              System.out.println("Det finns inget resultat att spara.");
              return;
          }
-//         Client client = new Client(battleService);
-//         client.askTosave();
+         Client client = new Client();
+         String result = client.save(battleResult);
+         System.out.println(result);
+
      }
 }
