@@ -35,4 +35,13 @@ public class BattleResult {
     public int getTotalRounds() {
         return totalRounds;
     }
+
+    @Override
+    public String toString() {
+        return  " Spelare : " + this.getUserName() + "\n" +
+                " karaktär namn : " + this.getUserCharacter()  + "\n" +
+                " Auto Player : " + this.getComputerCharacter() + "\n" +
+                " Antal rundor : " + this.getTotalRounds() + "\n" +
+                " Vinnare : " + this.getWinner();
+    }
 }

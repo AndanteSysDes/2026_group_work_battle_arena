@@ -1,4 +1,7 @@
+import client.Client;
+import game.BattleResult;
 import game.Game;
+import server.Server;
 
 public Scanner in = new Scanner(System.in);
 
@@ -66,8 +69,18 @@ private void startGame() {
 }
 
 private void showHistory() {
-  // TODO Think later with Client-Server system.
+
   System.out.println(" -- showHistory -- ");
+
+  Client client = new Client();
+  ArrayList<BattleResult> loadData = client.load();
+  for (int i = 0 ; loadData.size() > i ; i++) {
+
+      System.out.println( "Data number : " + (i +1) );
+      System.out.println(loadData.get(i).toString());
+      System.out.println("------------------------------------------");
+
+  }
 
 }
 
