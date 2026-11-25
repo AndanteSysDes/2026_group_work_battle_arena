@@ -61,10 +61,7 @@ private void startGame() {
   System.out.println(" -- startGame -- ");
   Game game = new Game();
 
-  game.setUpPlayer();
-  game.start();
-  game.showBattleResult();
-  game.saveBattleResult();
+  game.playGame();
 
 }
 

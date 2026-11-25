@@ -23,12 +23,18 @@ public class BattleService {
 //        commandMenu.put(2, "Specialförmåga");
     }
 
-    public void battle() {
+    public void battle() throws IllegalStateException {
         System.out.println("Battle Started!!");
         while (!hasWinner()) {
             takeTurn();
         }
-        setBattleResult();
+
+        try{
+            setBattleResult();
+        } catch (IllegalStateException e) {
+            throw e;
+        }
+
     }
 
     private void takeTurn() {
@@ -144,10 +150,11 @@ public class BattleService {
         showBattleProcess(attacker, defender, attacker.getFighter().getSpecialAbility(), actualDamage);
     }
 
-    private void setBattleResult() {
+    private void setBattleResult() throws IllegalStateException {
         if (!hasWinner()) {
             // TODO: need to throw something
-            return;
+            System.out.println("Ett fel har uppstått: Vinnare kunde inte hittas");
+            throw new IllegalStateException("Ett fel har uppstått: Vinnare kunde inte hittas");
         }
 
         Player winner;

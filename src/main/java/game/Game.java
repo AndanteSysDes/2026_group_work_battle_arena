@@ -11,10 +11,6 @@ public class Game {
     private BattleService battleService;
     private BattleResult battleResult;
 
-     public Game(){
-
-     }
-
     public Player getPlayer() {
         return player;
     }
@@ -43,7 +39,23 @@ public class Game {
         return battleResult;
     }
 
-    public void setUpPlayer(){
+    public void playGame(){
+
+        setUpPlayer();
+
+        try{
+            start();
+        }catch(IllegalStateException e){
+            System.out.println(e.getMessage());
+            System.out.println("Spelet har avbrutits");
+            return;
+        }
+
+        showBattleResult();
+        saveBattleResult();
+    }
+
+    protected void setUpPlayer(){
 
         player =new Player();
         player.inputName();
@@ -53,19 +65,22 @@ public class Game {
 
     }
 
-    public void start(){
+    protected void start() throws IllegalStateException{
 
          if(player == null || autoPlayer == null){
              setUpPlayer();
          }
          battleService = new BattleService(new Random(),player,autoPlayer);
-         battleService.battle();
-         battleResult = battleService.getBattleResult();
-
+         try{
+             battleService.battle();
+             battleResult = battleService.getBattleResult();
+         } catch(IllegalStateException e){
+             throw e;
+         }
 
      }
 
-     public void showBattleResult(){
+     protected void showBattleResult(){
 
          if(battleResult == null){
              System.out.println("Ingen strid har spelats ännu.");
@@ -78,7 +93,7 @@ public class Game {
 
      }
 
-     public void saveBattleResult(){
+     protected void saveBattleResult(){
 
          if(battleService == null){
              System.out.println("Det finns inget resultat att spara.");
