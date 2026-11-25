@@ -9,17 +9,6 @@ import java.util.ArrayList;
 
 //public class Client implements Runnable{
 public class Client{
-    // Jag skriver ner variablerna och constructören tillfälligt.
-    // Om det behövs inte, till exempel om du vill skapa try satsen med resourse, kan du ändra eller sudda dem.
-//    Socket socket;
-//    BufferedReader in;
-//    PrintWriter out;
-
-//    public Client(Socket socket) {
-//
-//        //this.socket = socket;
-//    }
-
     private String protocol;
     private static final String HOST = "127.0.0.1";;
     private static final int PORT = 8080;;
@@ -38,7 +27,7 @@ public class Client{
         this.saveData = saveData;
     }
 
-    private String communicateServer() {   // Temporary Method Name
+    private String communicateServer() {
         try (Socket socket = new Socket(HOST, PORT)){
 
             BufferedReader in = new BufferedReader
