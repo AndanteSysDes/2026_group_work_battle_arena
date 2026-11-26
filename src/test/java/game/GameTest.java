@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
@@ -23,7 +24,7 @@ class GameTest {
     }
 
     @Test
-    void testSetUpPlayer() {
+    void testSetUpPlayer() throws IOException {
         String input = "TestPlayer\n1\n";
 
         InputStream originalIn = System.in;
@@ -46,7 +47,7 @@ class GameTest {
     }
 
     @Test
-    void startShouldSetBattleResult(){
+    void startShouldSetBattleResult() throws IOException {
 
     Player player = new Player(new Scanner("1\n"));
     player.setName("TestPlayer");
@@ -54,6 +55,7 @@ class GameTest {
 
     Player autoPlayer = new AutoPlayer(new Random());
     autoPlayer.setName("AutoPlayer");
+    autoPlayer.getFighter().setCurrentHp(2);
 
     game.setPlayer(player);
     game.setAutoPlayer(autoPlayer);
@@ -63,7 +65,7 @@ class GameTest {
     }
 
    @Test
-    void showBattleResultShouldDisplayCorrectly(){
+    void showBattleResultShouldDisplayCorrectly() throws IOException{
 
        Player player = new Player(new Scanner("1\n"));
        player.setName("TestPlayer");
@@ -71,6 +73,8 @@ class GameTest {
 
        Player autoPlayer = new AutoPlayer(new Random());
        autoPlayer.setName("AutoPlayer");
+
+       autoPlayer.getFighter().setCurrentHp(2);
 
        game.setPlayer(player);
        game.setAutoPlayer(autoPlayer);

@@ -23,7 +23,6 @@ public class AutoPlayer extends Player {
     }
 
     @Override
-    // Det kan vara privat
     public void chooseFighter(){
         int selectValue =  random.nextInt(3);
         Fighter fighter = switch (selectValue) {
@@ -33,6 +32,7 @@ public class AutoPlayer extends Player {
             default -> throw new IllegalStateException("Unexpected value: " + selectValue);
         };
         setFighter(fighter);
+        System.out.println(getName() + " valde " + fighter.getName());
     }
 
     @Override

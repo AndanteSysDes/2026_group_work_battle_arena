@@ -6,6 +6,7 @@ import model.Warrior;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ class BattleServiceTest {
     }
 
     @Test
-    void battleShouldSetBattleResultWhenItHasWinner() {
+    void battleShouldSetBattleResultWhenItHasWinner() throws IllegalStateException, IOException {
         player.getFighter().setCurrentHp(1);
         autoPlayer.getFighter().setCurrentHp(0);
         battleService.battle();
@@ -44,7 +45,7 @@ class BattleServiceTest {
     }
 
     @Test
-    void battleShouldSetCollectBattleResult() {
+    void battleShouldSetCollectBattleResult() throws IllegalStateException, IOException {
         Player player = new Player(new Scanner("1\n1\n1"));
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
 
@@ -70,7 +71,7 @@ class BattleServiceTest {
 
 
     @Test
-    void battleShouldCountRoundsCorrectly() {
+    void battleShouldCountRoundsCorrectly()  throws IllegalStateException, IOException{
         player.getFighter().setCurrentHp(1);
         autoPlayer.getFighter().setCurrentHp(1);
         battleService.battle();
@@ -81,7 +82,7 @@ class BattleServiceTest {
     }
 
     @Test
-    void battleShouldCountRoundsCorrectlyEvenIfItTakesTweOrMoreRounds() {
+    void battleShouldCountRoundsCorrectlyEvenIfItTakesTweOrMoreRounds() throws IllegalStateException, IOException {
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
         Player player = new Player(new Scanner("1\n1\n"));
 
@@ -102,7 +103,7 @@ class BattleServiceTest {
     }
 
     @Test
-    void hasWinnerShouldBeTrueWhenEitherPlayersHPIs0() {
+    void hasWinnerShouldBeTrueWhenEitherPlayersHPIs0()  throws IllegalStateException, IOException{
         player.getFighter().setCurrentHp(1);
         autoPlayer.getFighter().setCurrentHp(0);
         assertTrue(battleService.hasWinner());
@@ -116,7 +117,7 @@ class BattleServiceTest {
     }
 
     @Test
-    void warriorCanUseTheSpecialAbility(){
+    void warriorCanUseTheSpecialAbility() throws IllegalStateException, IOException{
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
         Player player = new Player(new Scanner("2 \n 1  \n 1"));
 
@@ -136,7 +137,7 @@ class BattleServiceTest {
     }
 
     @Test
-    void mageCanUseTheSpecialAbility(){
+    void mageCanUseTheSpecialAbility() throws IllegalStateException, IOException{
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
         Player player = new Player(new Scanner("2 \n 1  \n 1"));
 
@@ -156,7 +157,7 @@ class BattleServiceTest {
     }
 
     @Test
-    void rangerCanUseTheSpecialAbility(){
+    void rangerCanUseTheSpecialAbility() throws IllegalStateException, IOException{
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
         Player player = new Player(new Scanner("2 \n 1  \n 1"));
 

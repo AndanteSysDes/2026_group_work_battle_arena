@@ -6,11 +6,12 @@ import model.Warrior;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.EOFException;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlayerTest {
+class PlayerTest{
 
     Player player;
     @BeforeEach
@@ -21,27 +22,27 @@ class PlayerTest {
     // InputName
 
     @Test
-    void inputNameShouldStoreName(){
+    void inputNameShouldStoreName() throws EOFException {
         Player player = new Player(new Scanner("Maahi"));
          player.inputName();
          assertEquals("Maahi", player.getName());
     }
 
     @Test
-    void inputNameShouldTrimSpaces(){
+    void inputNameShouldTrimSpaces() throws EOFException{
         Player player = new Player(new Scanner("    Maahi  \n"));
         player.inputName();
          assertEquals("Maahi", player.getName());
     }
 
     @Test
-    void inputNameShouldAskIfEmpty(){
+    void inputNameShouldAskIfEmpty() throws EOFException{
         Player player = new Player(new Scanner("\nMaahi\n"));
         player.inputName();
         assertEquals("Maahi", player.getName());
     }
     @Test
-    void inputNameShouldAskIfOnlySpaces(){
+    void inputNameShouldAskIfOnlySpaces() throws EOFException{
         Player player = new Player(new Scanner("   \nMaahi\n"));
         player.inputName();
         assertEquals("Maahi", player.getName());
@@ -50,28 +51,28 @@ class PlayerTest {
     // If Choose Fighter
 
     @Test
-    void chooseFighterShouldWarriorOnInput1(){
+    void chooseFighterShouldWarriorOnInput1() throws EOFException{
         player = new Player(new Scanner("1\n"));
         player.chooseFighter();
         assertEquals(Warrior.class, player.getFighter().getClass());
     }
 
     @Test
-    void chooseFighterShouldChooseMageOnInput2(){
+    void chooseFighterShouldChooseMageOnInput2() throws EOFException{
         player = new Player(new Scanner("2\n"));
         player.chooseFighter();
         assertEquals(Mage.class, player.getFighter().getClass());
     }
 
     @Test
-    void chooseFighterShouldChooseRangerOnInput3(){
+    void chooseFighterShouldChooseRangerOnInput3() throws EOFException{
         player = new Player(new Scanner("3\n"));
         player.chooseFighter();
         assertEquals(Ranger.class, player.getFighter().getClass());
     }
 
     @Test
-    void inputCommandShouldNotAllowSpecialAbilityIfAlreadyUsed(){
+    void inputCommandShouldNotAllowSpecialAbilityIfAlreadyUsed() throws EOFException{
         player = new Player(new Scanner("2\n1"));
         player.setFighter(new Warrior());
         player.getFighter().setHasSpecialAbilityUsed(true);
@@ -81,7 +82,7 @@ class PlayerTest {
 
 
    @Test
-    void chooseFighterShouldChooseInvalidInput(){
+    void chooseFighterShouldChooseInvalidInput() throws EOFException{
         player = new Player(new Scanner("9\n1\n"));
         player.chooseFighter();
         assertEquals(Warrior.class, player.getFighter().getClass());
@@ -97,7 +98,7 @@ class PlayerTest {
     //inputCommand()
 
     @Test
-    void inputCommandShouldReturn1ForNormalAttack(){
+    void inputCommandShouldReturn1ForNormalAttack() throws EOFException{
         // 1. Normal Attack
         // 2. Special Attack
         player = new Player(new Scanner("1\n"));
@@ -105,13 +106,13 @@ class PlayerTest {
     }
 
     @Test
-    void inputCommandShouldReturn2ForSpecialAttack(){
+    void inputCommandShouldReturn2ForSpecialAttack() throws EOFException{
         player = new Player(new Scanner("2\n"));
         assertEquals(2, player.inputCommand());
     }
 
     @Test
-    void inputCommandShouldReturCollectValue(){
+    void inputCommandShouldReturCollectValue() throws EOFException{
         //1. Normal Attack
         //2. Special Attack
 

@@ -44,4 +44,6 @@ public class BattleResult {
                 " Antal rundor : " + this.getTotalRounds() + "\n" +
                 " Vinnare : " + this.getWinner();
     }
+
+
 }

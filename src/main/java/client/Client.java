@@ -27,7 +27,7 @@ public class Client{
         this.saveData = saveData;
     }
 
-    private String communicateServer() {
+    private String communicateServer() throws IOException {
         try (Socket socket = new Socket(HOST, PORT)){
 
             BufferedReader in = new BufferedReader
@@ -66,35 +66,45 @@ public class Client{
                 return response;
             }
 
-            return "Protocol error: Invalid protocol";
+            throw new IOException("Protocol error: Invalid protocol");
 
         }catch(IOException e){
-            e.printStackTrace();
-            return "Connection error: " + e.getMessage();
+           throw new IOException("Connection error: " + e.getMessage());
         }
     }
 
     public String save(BattleResult battleResult) {
         this.protocol = "SAVE";
         this.saveData = battleResult;
-
-        String response = communicateServer();
-
-        return response;
+        try{
+            String response = communicateServer();
+            return response;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return "Det gick inte att spara data. Kontrollera att servern är igång.";
+        }
     }
 
     public ArrayList<BattleResult> load() {
         this.protocol = "LOAD";
-        String response = communicateServer();
+        try{
+            String response = communicateServer();
 
-        String[] responseArray = response.split(":");
-        ArrayList<BattleResult> loadData = new ArrayList<>();
+            String[] responseArray = response.split(":");
+            ArrayList<BattleResult> loadData = new ArrayList<>();
 
-        for(String row : responseArray){
-            loadData.add(BattleResultConverter.parse(row));
+            for(String row : responseArray){
+                loadData.add(BattleResultConverter.parse(row));
+            }
+
+            return loadData;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Det gick inte att ladda data. Kontrollera att servern är igång.");
+            return new ArrayList<BattleResult>();
         }
 
-        return loadData;
+
     }
 
 }

@@ -1,7 +1,6 @@
 import client.Client;
 import game.BattleResult;
 import game.Game;
-import server.Server;
 
 public Scanner in = new Scanner(System.in);
 
@@ -26,7 +25,6 @@ private int takeUserInput(Scanner in) {
         System.out.print("DITT VAL : ");
 
         if (!in.hasNextLine()) {
-            // TODO User inputs EOF. We will think about it later...
             System.out.println("Inmatningen har avbrutits.");
             return 0;
         }
@@ -60,33 +58,22 @@ private void showWelcomeMessage() {
 private void startGame() {
   System.out.println(" -- startGame -- ");
   Game game = new Game();
-
-  game.setUpPlayer();
-  game.start();
-  game.showBattleResult();
-  game.saveBattleResult();
-
+  game.playGame();
 }
 
 private void showHistory() {
-
   System.out.println(" -- showHistory -- ");
-
   Client client = new Client();
   ArrayList<BattleResult> loadData = client.load();
   for (int i = 0 ; loadData.size() > i ; i++) {
-
-      System.out.println( "Data number : " + (i +1) );
+      System.out.println( "Data number : " + (i + 1) );
       System.out.println(loadData.get(i).toString());
       System.out.println("------------------------------------------");
-
   }
-
 }
 
 private void end() {
   System.out.println("Hej då!");
   in.close();
   System.exit(0);
-
 }

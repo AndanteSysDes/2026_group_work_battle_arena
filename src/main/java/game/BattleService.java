@@ -2,6 +2,7 @@ package game;
 
 import model.ActionType;
 
+import java.io.IOException;
 import java.util.*;
 
 public class BattleService {
@@ -18,20 +19,17 @@ public class BattleService {
         this.player = player;
         this.autoPlayer = autoPlayer;
         this.roundCounter = 0;
-//        commandMenu = new HashMap<>();
-//        commandMenu.put(1, "Vanlig attack");
-//        commandMenu.put(2, "Specialförmåga");
     }
 
-    public void battle() {
+    public void battle() throws IllegalStateException, IOException {
         System.out.println("Battle Started!!");
         while (!hasWinner()) {
             takeTurn();
         }
-        setBattleResult();
+        createBattleResult();
     }
 
-    private void takeTurn() {
+    private void takeTurn() throws IOException {
         roundCounter++;
         System.out.println("=========================================================");
 
@@ -50,8 +48,7 @@ public class BattleService {
                 case 1 -> normalAttack(turnPlayer, turnOrder);
                 case 2 -> specialAttack(turnPlayer, turnOrder);
                 default -> {
-                    // Something wrong. show message and throw exception.
-                    return;
+                    throw new IOException("Ett okänt kommando har angetts");
                 }
             }
 
@@ -144,10 +141,10 @@ public class BattleService {
         showBattleProcess(attacker, defender, attacker.getFighter().getSpecialAbility(), actualDamage);
     }
 
-    private void setBattleResult() {
+    private void createBattleResult() throws IllegalStateException {
         if (!hasWinner()) {
-            // TODO: need to throw something
-            return;
+            System.out.println("Ett fel har uppstått: Vinnare kunde inte hittas");
+            throw new IllegalStateException("Ett fel har uppstått: Vinnare kunde inte hittas");
         }
 
         Player winner;
@@ -162,13 +159,15 @@ public class BattleService {
         String computerCharacter = autoPlayer.getFighter().getName();
         int totalRounds = roundCounter;
 
-        this.battleResult = new BattleResult(
+        BattleResult result = new BattleResult(
                 userName,
                 userCharacter,
                 computerCharacter,
                 winner.getName(),
                 totalRounds
         );
+
+        setBattleResult(result);
     }
 
     public Random getRandom() {

@@ -2,6 +2,8 @@ package game;
 
 import client.Client;
 
+import java.io.EOFException;
+import java.io.IOException;
 import java.util.Random;
 
 public class Game {
@@ -10,10 +12,6 @@ public class Game {
     private Player autoPlayer;
     private BattleService battleService;
     private BattleResult battleResult;
-
-     public Game(){
-
-     }
 
     public Player getPlayer() {
         return player;
@@ -43,17 +41,31 @@ public class Game {
         return battleResult;
     }
 
-    public void setUpPlayer(){
+    public void playGame(){
+        try{
+            setUpPlayer();
+            start();
+            showBattleResult();
+            saveBattleResult();
 
+
+        }catch(IllegalStateException e){
+            System.out.println(e.getMessage());
+            System.out.println("Spelet har avbrutits");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+            System.out.println("Spelet har avbrutits");
+        }
+    }
+
+    protected void setUpPlayer() throws EOFException {
         player =new Player();
         player.inputName();
         player.chooseFighter();
-
         autoPlayer = new AutoPlayer(new Random());
-
     }
 
-    public void start(){
+    protected void start() throws IllegalStateException, IOException {
 
          if(player == null || autoPlayer == null){
              setUpPlayer();
@@ -62,10 +74,9 @@ public class Game {
          battleService.battle();
          battleResult = battleService.getBattleResult();
 
-
      }
 
-     public void showBattleResult(){
+     protected void showBattleResult(){
 
          if(battleResult == null){
              System.out.println("Ingen strid har spelats ännu.");
@@ -78,7 +89,7 @@ public class Game {
 
      }
 
-     public void saveBattleResult(){
+     protected void saveBattleResult(){
 
          if(battleService == null){
              System.out.println("Det finns inget resultat att spara.");
