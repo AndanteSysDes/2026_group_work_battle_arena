@@ -14,6 +14,17 @@ public abstract class Fighter implements SpecialAbility{
     protected int minAttackPoint;
     protected int maxAttackPoint;
 
+    public Fighter(FighterType fighterType) {
+        this.name =fighterType.getName();
+        this.maxHp =fighterType.getMaxHP();
+        this.currentHp =this.maxHp;
+        this.specialAbility = fighterType.getSpecialAbility();
+        this.minAttackPoint = fighterType.getMinAttackPoint();
+        this.maxAttackPoint =fighterType.getMaxAttackPoint();
+        this.normalAbility =ActionType.ATTACK;
+        this.random = new Random();
+    }
+
     public Fighter(){
         this.normalAbility =ActionType.ATTACK;
         this.random = new Random();
