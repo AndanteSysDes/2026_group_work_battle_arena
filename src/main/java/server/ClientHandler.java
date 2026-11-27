@@ -1,5 +1,6 @@
 package server;
 
+import client.Client;
 import game.BattleResult;
 import game.BattleResultConverter;
 
@@ -8,8 +9,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class ClientHandler implements Runnable {
+
+    private static final Logger logger =Logger.getLogger(ClientHandler.class.getName());
     private final Socket socket;
     private FileIO fileIo;
 
@@ -28,12 +32,19 @@ public class ClientHandler implements Runnable {
             String message;
 
             while((message = in.readLine()) != null) {
+//                String[] parts = line.trim().split(" ",2);
+//                String command = parts[0].toUpperCase();
+                String[] parts = message.trim().split(" ",2);
+                String data = parts.length > 1 ? parts[1] : "";
+                String command = parts[0].toUpperCase();
 
-                switch (message) {
+                switch (command) {
                     case "SAVE" -> {
-                        out.println("Accept save request");
+                        //out.println("Accept save request");
+
                         if((message = in.readLine()) != null){
                             String result = save(message);
+                            logger.info(client + " Accept save request" + data);
                             out.println(result);
                         }
                     }

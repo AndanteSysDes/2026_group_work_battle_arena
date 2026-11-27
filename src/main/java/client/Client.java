@@ -6,9 +6,13 @@ import game.BattleResultConverter;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 //public class Client implements Runnable{
 public class Client{
+
+    private static final Logger logger =Logger.getLogger(Client.class.getName());
+
     private String protocol;
     private static final String HOST = "127.0.0.1";;
     private static final int PORT = 8080;;
@@ -37,19 +41,24 @@ public class Client{
 
 
             if(protocol.equals("SAVE")){
-                out.println(protocol);
+                //out.println(protocol);
+                logger.info(protocol);
 
                 String response = in.readLine();
                 if(response == null){
-                    String errorMessage = "Server is closed. Task: " + protocol + " is failed.";
-                    System.out.println(errorMessage);
-                    return errorMessage;
+//                    String errorMessage = "Server is closed. Task: " + protocol + " is failed.";
+//                    System.out.println(errorMessage);
+                    logger.warning("Server responded with null");
+                   // return errorMessage;
+                    return null;
                 }
-                System.out.println(response);
+//                System.out.println(response);
+                logger.info(response);
                 String data = BattleResultConverter.format(saveData);
                 out.println(data);
                 String response2 = in.readLine();
-                System.out.println(response2);
+//                System.out.println(response2);
+                logger.info(response2);
                 return response2;
             }
 
