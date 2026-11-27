@@ -39,8 +39,8 @@ public class BattleResult {
     @Override
     public String toString() {
         return  " Spelare : " + this.getUserName() + "\n" +
-                " Karaktär Namn : " + this.getUserCharacter()  + "\n" +
-                " Auto Player : " + this.getComputerCharacter() + "\n" +
+                " Spelarens Karaktär Namn : " + this.getUserCharacter()  + "\n" +
+                " Auto Players Karaktär Namn: " + this.getComputerCharacter() + "\n" +
                 " Antal Rundor : " + this.getTotalRounds() + "\n" +
                 " Vinnare : " + this.getWinner();
     }
