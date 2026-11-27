@@ -41,7 +41,7 @@ public class Player {
         String input;
 
         while (true) {
-            System.out.println("Ange ditt namn: ");
+            System.out.println("ANGE DITT NAMN : ");
 
             if (!scanner.hasNextLine()) {
                 throw new EOFException("Inmatningen avslutades.");
@@ -60,6 +60,9 @@ public class Player {
     }
 
     public void chooseFighter() throws EOFException {
+
+        System.out.println("------------------------------------------------");
+
         String errorMessage = "Ogiltigt val, ange mellan 1 och 3.";
         String warriorDescription = "1. Warrior ---  HP:120\n    Specialförmåga: " + ActionType.DEFENCE.getDisplayName()
                 + "\n    " + ActionType.DEFENCE.getDescription() ;
@@ -79,7 +82,7 @@ public class Player {
             System.out.println(warriorDescription);
             System.out.println(mageDescription);
             System.out.println(rangerDescription);
-            System.out.print("\nVälj ditt karaktär: ");
+            System.out.print("\nVÄLJ DITT KARAKTÄR : ");
 
             if (!scanner.hasNextLine()) {
                 throw new EOFException("Inmatningen avslutades.");
@@ -119,7 +122,7 @@ public class Player {
             else {
                 System.out.println("2. " + getFighter().getSpecialAbility().getDisplayName() + " (Du kan använda bara en gång.)");
             }
-            System.out.print("\n Skriv ditt kommando : ");
+            System.out.print("\nSKRIV DITT KOMMANDO : ");
 
 
             if (!scanner.hasNextLine()) {

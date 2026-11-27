@@ -82,8 +82,8 @@ public class Game {
              System.out.println("Ingen strid har spelats ännu.");
              return;
          }
-
-         System.out.println("Battle resultat är ");
+         System.out.println("------------------------------------------------");
+         System.out.println("Battle resultat är :");
          System.out.println(battleResult);
 
 

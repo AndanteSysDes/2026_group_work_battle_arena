@@ -49,7 +49,7 @@ public class Client{
                 String data = BattleResultConverter.format(saveData);
                 out.println(data);
                 String response2 = in.readLine();
-                System.out.println(response2);
+
                 return response2;
             }
 
@@ -62,7 +62,7 @@ public class Client{
                     return errorMessage;
                 }
 
-                System.out.println(response);
+
                 return response;
             }
 
