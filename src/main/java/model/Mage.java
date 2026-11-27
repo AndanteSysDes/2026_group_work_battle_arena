@@ -6,13 +6,8 @@ public class Mage extends Fighter{
 
 
     public Mage() {
-        super();
-        this.name = "Mage";
-        this.maxHp = 90;
-        this.currentHp = this.maxHp;
-        this.specialAbility = ActionType.HEAL;
-        this.minAttackPoint = 3;
-        this.maxAttackPoint = 13;
+        super(FighterType.MAGE);
+
     }
 
     @Override

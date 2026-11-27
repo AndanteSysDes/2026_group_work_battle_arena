@@ -47,8 +47,8 @@ public class FileIO {
                 StandardOpenOption.APPEND
         );
 
-        System.out.println("Saved: " + saveText);
-        return "Saved successfully!";
+        System.out.println("Sparad: " + saveText);
+        return "Sparad framgångsrikt!";
 
     }
 

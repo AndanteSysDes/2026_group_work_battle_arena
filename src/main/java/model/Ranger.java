@@ -6,13 +6,8 @@ public class Ranger extends Fighter{
 
 
     public Ranger() {
-        super();
-        this.name = "Ranger";
-        this.maxHp =105;
-        this.currentHp =this.maxHp;
-        this.specialAbility = ActionType.PRECISE_SHOT;
-        this.minAttackPoint = 7;
-        this.maxAttackPoint = 17;
+        super(FighterType.RANGER);
+
     }
 
     @Override

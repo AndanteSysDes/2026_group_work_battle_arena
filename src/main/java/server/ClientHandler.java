@@ -31,7 +31,7 @@ public class ClientHandler implements Runnable {
 
                 switch (message) {
                     case "SAVE" -> {
-                        out.println("Accept save request");
+                        //out.println("Accept save request");
                         if((message = in.readLine()) != null){
                             String result = save(message);
                             out.println(result);

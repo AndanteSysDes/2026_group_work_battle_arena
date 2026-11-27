@@ -56,17 +56,17 @@ private void showWelcomeMessage() {
 }
 
 private void startGame() {
-  System.out.println(" -- startGame -- ");
+  System.out.println(" -- Starta Spelet -- ");
   Game game = new Game();
   game.playGame();
 }
 
 private void showHistory() {
-  System.out.println(" -- showHistory -- ");
+  System.out.println(" -- Visa Historiken -- ");
   Client client = new Client();
   ArrayList<BattleResult> loadData = client.load();
   for (int i = 0 ; loadData.size() > i ; i++) {
-      System.out.println( "Data number : " + (i + 1) );
+      System.out.println( "Datanummer : " + (i + 1) );
       System.out.println(loadData.get(i).toString());
       System.out.println("------------------------------------------");
   }
