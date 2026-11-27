@@ -49,7 +49,7 @@ class GameTest {
     @Test
     void startShouldSetBattleResult() throws IOException {
 
-    Player player = new Player(new Scanner("1\n"));
+    Player player = new HumanPlayer(new Scanner("1\n"));
     player.setName("TestPlayer");
     player.setFighter(new Warrior());
 
@@ -67,7 +67,7 @@ class GameTest {
    @Test
     void showBattleResultShouldDisplayCorrectly() throws IOException{
 
-       Player player = new Player(new Scanner("1\n"));
+       Player player = new HumanPlayer(new Scanner("1\n"));
        player.setName("TestPlayer");
        player.setFighter(new Warrior());
 

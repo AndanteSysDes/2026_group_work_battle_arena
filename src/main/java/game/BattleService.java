@@ -10,8 +10,8 @@ public class BattleService {
     private int roundCounter;
     private BattleResult battleResult;
     private Random random;
-    Player player;
-    Player autoPlayer;
+    private Player player;
+    private Player autoPlayer;
 
 
     public BattleService(Random random, Player player, Player autoPlayer) {

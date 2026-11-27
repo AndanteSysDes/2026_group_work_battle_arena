@@ -22,7 +22,7 @@ class BattleServiceTest {
 
     @BeforeEach
     void setUp(){
-        player =  new Player(new Scanner("1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n"));
+        player =  new HumanPlayer(new Scanner("1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n"));
         autoPlayer = new AutoPlayer(new Random());
         player.setName("Player1");
         player.setFighter(new Warrior());
@@ -46,7 +46,7 @@ class BattleServiceTest {
 
     @Test
     void battleShouldSetCollectBattleResult() throws IllegalStateException, IOException {
-        Player player = new Player(new Scanner("1\n1\n1"));
+        Player player = new HumanPlayer(new Scanner("1\n1\n1"));
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
 
         player.setName("Player1");
@@ -84,7 +84,7 @@ class BattleServiceTest {
     @Test
     void battleShouldCountRoundsCorrectlyEvenIfItTakesTweOrMoreRounds() throws IllegalStateException, IOException {
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
-        Player player = new Player(new Scanner("1\n1\n"));
+        Player player = new HumanPlayer(new Scanner("1\n1\n"));
 
         player.setName("Player1");
         player.setFighter(new Mage());
@@ -119,7 +119,7 @@ class BattleServiceTest {
     @Test
     void warriorCanUseTheSpecialAbility() throws IllegalStateException, IOException{
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
-        Player player = new Player(new Scanner("2 \n 1  \n 1"));
+        Player player = new HumanPlayer(new Scanner("2 \n 1  \n 1"));
 
         player.setName("Player1");
         player.setFighter(new Warrior());
@@ -139,7 +139,7 @@ class BattleServiceTest {
     @Test
     void mageCanUseTheSpecialAbility() throws IllegalStateException, IOException{
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
-        Player player = new Player(new Scanner("2 \n 1  \n 1"));
+        Player player = new HumanPlayer(new Scanner("2 \n 1  \n 1"));
 
         player.setName("Player1");
         player.setFighter(new Mage());
@@ -159,7 +159,7 @@ class BattleServiceTest {
     @Test
     void rangerCanUseTheSpecialAbility() throws IllegalStateException, IOException{
         Player autoPlayer = new AutoPlayer(new FixedRandomForCommand(1));
-        Player player = new Player(new Scanner("2 \n 1  \n 1"));
+        Player player = new HumanPlayer(new Scanner("2 \n 1  \n 1"));
 
         player.setName("Player1");
         player.setFighter(new Ranger());

@@ -59,7 +59,7 @@ public class Game {
     }
 
     protected void setUpPlayer() throws EOFException {
-        player =new Player();
+        player =new HumanPlayer();
         player.inputName();
         player.chooseFighter();
         autoPlayer = new AutoPlayer(new Random());
