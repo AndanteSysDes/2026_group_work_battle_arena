@@ -1,54 +1,58 @@
 import client.Client;
 import game.BattleResult;
 import game.Game;
+import game.Menu;
 
 public Scanner in = new Scanner(System.in);
 
 void main() {
+
     showWelcomeMessage();
 
     while (true) {
       showMenu();
-      int userInput = takeUserInput(in);
-      switch (userInput) {
-        case 1 -> startGame();
-        case 2 -> showHistory();
-        case 0 -> end();
-      }
+      String userInput = takeUserInput();
+        if(userInput.equals(Menu.GAME_START.getInputValue())){
+            startGame();
+        }
+        if(userInput.equals(Menu.SHOW_HISTORY.getInputValue())){
+            showHistory();
+        }
+        if(userInput.equals(Menu.END_SYSTEM.getInputValue())){
+            end();
+        }
+
     }
 
 }
 
-private int takeUserInput(Scanner in) {
+private String takeUserInput() {
 
     while (true) {
         System.out.print("DITT VAL : ");
 
         if (!in.hasNextLine()) {
             System.out.println("Inmatningen har avbrutits.");
-            return 0;
+            return Menu.END_SYSTEM.getInputValue();
         }
 
         String userInput = in.nextLine().trim();
-        switch (userInput) {
-            case "0":
-                return 0;
-            case "1":
-                return 1;
-            case "2":
-                return 2;
-            default:
-                System.out.println("Ogiltig inmatning. Pröva igen.");
+
+        if(!Menu.containsMenuOption(userInput)){
+            System.out.println("Ogiltig inmatning. Pröva igen.");
+            continue;
         }
+
+        return userInput;
     }
 }
 
 private void showMenu() {
     System.out.println("=========================================================");
     System.out.println("Välj följande meny:");
-    System.out.println("1. Starta spelet");
-    System.out.println("2. Visa spelhistoriken");
-    System.out.println("0. Avsluta spelet.");
+    System.out.println(Menu.GAME_START.getDisplayName());
+    System.out.println(Menu.SHOW_HISTORY.getDisplayName());
+    System.out.println(Menu.END_SYSTEM.getDisplayName());
 }
 
 private void showWelcomeMessage() {
