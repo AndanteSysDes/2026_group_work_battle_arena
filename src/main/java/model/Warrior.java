@@ -6,13 +6,8 @@ public class Warrior extends Fighter{
     private boolean isDefending;
 
     public Warrior(){
-        super();
-        this.name = "Warrior";
-        this.maxHp = 120;
-        this.currentHp = this.maxHp;
-        this.specialAbility = ActionType.DEFENCE;
-        this.minAttackPoint = 5;
-        this.maxAttackPoint = 15;
+        super(FighterType.WARRIOR);
+
     }
 
     @Override
