@@ -23,7 +23,7 @@ public class AutoPlayer extends Player {
     }
 
     @Override
-    public void chooseFighter(){
+    public void chooseFighter() throws IllegalStateException{
         int selectValue =  random.nextInt(3);
         Fighter fighter = switch (selectValue) {
             case 0 -> new Warrior();
@@ -44,14 +44,6 @@ public class AutoPlayer extends Player {
 
         selectValue = random.nextInt(1,3);
         return selectValue;
-    }
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
     }
 
 }
