@@ -1,9 +1,6 @@
 package game;
 
-import model.Fighter;
-import model.Mage;
-import model.Ranger;
-import model.Warrior;
+import model.*;
 
 import java.util.Random;
 
@@ -25,14 +22,20 @@ public class AutoPlayer extends Player {
     @Override
     public void chooseFighter(){
         int selectValue =  random.nextInt(3);
-        Fighter fighter = switch (selectValue) {
-            case 0 -> new Warrior();
-            case 1 -> new Mage();
-            case 2 -> new Ranger();
-            default -> throw new IllegalStateException("Unexpected value: " + selectValue);
-        };
-        setFighter(fighter);
-        System.out.println(getName() + " valde " + fighter.getName());
+        String select = String.valueOf(selectValue+1);
+
+        if(!FighterType.containsFighterOption(select)){
+            throw new IllegalStateException("Unexpected value: " + selectValue);
+        }
+
+        if(select.equals(FighterType.WARRIOR.getInputValue())){
+            setFighter(new Warrior());
+        } else if(select.equals(FighterType.MAGE.getInputValue())){
+            setFighter(new Mage());
+        } else if(select.equals(FighterType.RANGER.getInputValue())){
+            setFighter(new Ranger());
+        }
+        System.out.println(getName() + " valde " + getFighter().getName());
     }
 
     @Override

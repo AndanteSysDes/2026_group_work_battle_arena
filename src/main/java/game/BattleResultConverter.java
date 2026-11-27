@@ -1,5 +1,7 @@
 package game;
 
+import model.FighterType;
+
 public class BattleResultConverter {
     public static BattleResult parse(String text){
 
@@ -19,15 +21,11 @@ public class BattleResultConverter {
         String computerCharacter = data[2].trim();
         String winner = data[3].trim();
 
-        if(!userCharacter.equals("Warrior") &&
-                !userCharacter.equals("Mage") &&
-                !userCharacter.equals("Ranger")){
+        if(!FighterType.containsFighterName(userCharacter)){
             throw new IllegalArgumentException("invalid user character");
         }
 
-        if(!computerCharacter.equals("Warrior") &&
-                !computerCharacter.equals("Mage") &&
-                !computerCharacter.equals("Ranger")){
+        if(!FighterType.containsFighterName(computerCharacter)){
             throw new IllegalArgumentException("invalid computer character");
         }
 

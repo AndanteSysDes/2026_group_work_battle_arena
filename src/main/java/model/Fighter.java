@@ -25,16 +25,6 @@ public abstract class Fighter implements SpecialAbility{
         this.random = new Random();
     }
 
-    public Fighter(){
-        this.normalAbility =ActionType.ATTACK;
-        this.random = new Random();
-    }
-
-    public Fighter(Random random){
-        this.normalAbility =ActionType.ATTACK;
-        this.random = random;
-    }
-
     public String getName() {
         return name;
     }

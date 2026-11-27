@@ -64,12 +64,6 @@ public class Player {
         System.out.println("------------------------------------------------");
 
         String errorMessage = "Ogiltigt val, ange mellan 1 och 3.";
-        String warriorDescription = "1. Warrior ---  HP:120\n    Specialförmåga: " + ActionType.DEFENCE.getDisplayName()
-                + "\n    " + ActionType.DEFENCE.getDescription() ;
-        String mageDescription = "2. Mage ---  HP:90\n    Specialförmåga: " + ActionType.HEAL.getDisplayName()
-                + "\n    " + ActionType.HEAL.getDescription() ;
-        String rangerDescription = "3. Ranger ---  HP:105\n    Specialförmåga: " + ActionType.PRECISE_SHOT.getDisplayName()
-                + "\n    " + ActionType.PRECISE_SHOT.getDescription() ;
         boolean isInvalidValue = false;
 
         while (fighter == null) {
@@ -79,9 +73,9 @@ public class Player {
             isInvalidValue = false;
 
             System.out.println("Välj bland följande karaktärer:");
-            System.out.println(warriorDescription);
-            System.out.println(mageDescription);
-            System.out.println(rangerDescription);
+            System.out.println(FighterType.WARRIOR.getDescription());
+            System.out.println(FighterType.MAGE.getDescription());
+            System.out.println(FighterType.RANGER.getDescription());
             System.out.print("\nVÄLJ DITT KARAKTÄR : ");
 
             if (!scanner.hasNextLine()) {
@@ -93,16 +87,19 @@ public class Player {
                 isInvalidValue = true;
                 continue;
             }
-
-            switch (input) {
-                case "1" -> fighter = new Warrior();
-                case "2" -> fighter = new Mage();
-                case "3" -> fighter = new Ranger();
-                default -> {
-                    fighter = null;
-                    isInvalidValue = true;
-                }
+            if(!FighterType.containsFighterOption(input)){
+                isInvalidValue = true;
+                continue;
             }
+
+            if(input.equals(FighterType.WARRIOR.getInputValue())){
+                fighter = new Warrior();
+            } else if(input.equals(FighterType.MAGE.getInputValue())){
+                fighter = new Mage();
+            } else if(input.equals(FighterType.RANGER.getInputValue())){
+                fighter = new Ranger();
+            }
+
         }
     }
 
